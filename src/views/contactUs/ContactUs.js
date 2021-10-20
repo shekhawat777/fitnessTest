@@ -10,17 +10,22 @@ import {
     CInput,
     CLabel,
     CRow,
+    CTextarea,
 } from '@coreui/react'
 
 import { Formik, ErrorMessage } from "formik";
-import { Link } from 'react-router-dom';
 import * as Yup from "yup";
 import ErrorLable from '../../reusable/ErrorLable';
+import axios from 'axios';
 
 const ContactUs = () => {
 
-    const onFormSubmit = (values, { resetForm }) => {
-        console.log("Submit")
+
+    const onFormSubmit = async (values, { resetForm }) => {
+        console.log("Test Value", values)
+        await axios.post("http://localhost:3500/contactUs", values).then(res => {
+            resetForm()
+        })
     }
     return (
         <>
@@ -33,18 +38,19 @@ const ContactUs = () => {
                         <CCardBody>
                             <Formik
                                 initialValues={{
-                                    name: "",
-                                    subject: "",
-                                    message: "",
+                                    firstName: "",
+                                    lastName: "",
                                     email: "",
-
+                                    mobile: '',
+                                    message: '',
                                 }}
                                 onSubmit={onFormSubmit}
                                 validationSchema={Yup.object({
-                                    name: Yup.string().max(50, "FEEDBACK_NAME_MAX_LENGTH").required("FEEDBACK_NAME_REQUIRED"),
-                                    subject: Yup.string().max(50, "FEEDBACK_SUBJECT_MAX_LENGTH").required("FEEDBACK_SUBJECT_REQUIRED"),
-                                    message: Yup.string().max(50, "FEEDBACK_MESSAGE_MAX_LENGTH").required("FEEDBACK_MESSAGE_REQUIRED"),
-                                    email: Yup.string().email("FEEDBACK_ADMIN_VALID_EMAIL").required("FEEDBACK_ADMIN_EMAIL_REQUIRED"),
+                                    firstName: Yup.string().required("First name requiered.").matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+                                    lastName: Yup.string().required("Last name requiered.").matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+                                    message: Yup.string().required("Message requiered."),
+                                    email: Yup.string().email("Invalid email.").required("Email requiered."),
+                                    mobile: Yup.string().required("Mobile Number requiered."),
                                 })}
                             >
                                 {formik => (
@@ -52,38 +58,46 @@ const ContactUs = () => {
                                         <CFormGroup row className="my-0">
                                             <CCol xs="6">
                                                 <CFormGroup>
-                                                    <CLabel htmlFor="name">Name</CLabel>
-                                                    <CInput id="name" placeholder="Enter name" {...formik.getFieldProps('name')} />
-                                                    <ErrorMessage name="name" render={msg => <ErrorLable msg={msg} />} />
+                                                    <CLabel htmlFor="firstName">First Name</CLabel>
+                                                    <CInput autoComplete="nope" id="firstName" placeholder="Enter first name" {...formik.getFieldProps('firstName')} />
+                                                    <ErrorMessage name="firstName" render={msg => <ErrorLable msg={msg} />} />
                                                 </CFormGroup>
                                             </CCol>
                                             <CCol xs="6">
                                                 <CFormGroup>
-                                                    <CLabel htmlFor="email"> Admin Email</CLabel>
-                                                    <CInput id="email" placeholder="Enter Email" name="email" {...formik.getFieldProps('email')} />
-                                                    <ErrorMessage name="name" render={msg => <ErrorLable msg={msg} />} />
+                                                    <CLabel htmlFor="lastName">Last Name</CLabel>
+                                                    <CInput autoComplete="nope" id="lastName" placeholder="Enter last name" name="lastName" {...formik.getFieldProps('lastName')} />
+                                                    <ErrorMessage name="lastName" render={msg => <ErrorLable msg={msg} />} />
                                                 </CFormGroup>
                                             </CCol>
                                         </CFormGroup>
                                         <CFormGroup row className="my-0">
                                             <CCol xs="6">
                                                 <CFormGroup>
-                                                    <CLabel htmlFor="subject">Subject</CLabel>
-                                                    <CInput id="subject" placeholder="Enter Subject" name="subject" {...formik.getFieldProps('subject')} />
-                                                    <ErrorMessage name="name" render={msg => <ErrorLable msg={msg} />} />
+                                                    <CLabel htmlFor="email">Email</CLabel>
+                                                    <CInput autoComplete="nope" id="email" placeholder="Enter Email" name="email" {...formik.getFieldProps('email')} />
+                                                    <ErrorMessage name="email" render={msg => <ErrorLable msg={msg} />} />
                                                 </CFormGroup>
                                             </CCol>
                                             <CCol xs="6">
                                                 <CFormGroup>
+                                                    <CLabel htmlFor="mobile">Mobile</CLabel>
+                                                    <CInput autoComplete="nope" id="mobile" placeholder="Enter Mobile No" name="mobile" {...formik.getFieldProps('mobile')} />
+                                                    <ErrorMessage name="mobile" render={msg => <ErrorLable msg={msg} />} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CFormGroup>
+                                        <CFormGroup row className="my-0">
+                                            <CCol xs="6">
+                                                <CFormGroup>
                                                     <CLabel htmlFor="message">Message</CLabel>
-                                                    <CInput id="message" placeholder="Enter Message" name="message" {...formik.getFieldProps('message')} />
-                                                    <ErrorMessage name="name" render={msg => <ErrorLable msg={msg} />} />
+                                                    <CTextarea id="message" placeholder="Enter Message" name="message" {...formik.getFieldProps('message')} />
+                                                    <ErrorMessage name="message" render={msg => <ErrorLable msg={msg} />} />
                                                 </CFormGroup>
                                             </CCol>
                                         </CFormGroup>
 
-                                        <CButton type="submit" color="primary">Submit</CButton>{" "}
-                                        <Link to="/feedbacks"><CButton color="info" variant="outline">Cancel</CButton></Link>
+                                        <CButton type="submit" color="primary">Submit</CButton>
                                     </CForm>
                                 )}
                             </Formik>

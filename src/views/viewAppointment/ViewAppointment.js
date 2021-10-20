@@ -1,29 +1,24 @@
-import { CBadge, CCard, CCardBody, CCardHeader, CCol, CDataTable, CRow } from '@coreui/react'
-import React from 'react'
+import { CCard, CCardBody, CCardHeader, CCol, CDataTable, CRow } from '@coreui/react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import CIcon from '@coreui/icons-react';
+import axios from 'axios';
 
-const getBadge = status => {
-    switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
-        default: return 'primary'
-    }
-}
-
-const fields = ['question', 'answer', 'status', 'action(s)']
-const data = [
-    {
-        id: 1,
-        question: "What is your name?",
-        answer: "Harshit Kishor",
-        status: "Active"
-    }
-]
+const fields = ['firstName', 'lastName', 'email', 'mobile', 'age', 'streetName', 'city', 'state', 'country', 'pinCode', 'preferences', 'package', 'action(s)']
 
 const ViewAppointment = () => {
+
+    const [data, setData] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios.get("http://localhost:3500/allfriends").then(res => {
+                console.log("Res,", res)
+                setData(res.data)
+            })
+        }
+        fetchData()
+    }, [])
+
     return (
         <CRow>
             <CCol>
@@ -46,19 +41,12 @@ const ViewAppointment = () => {
                             itemsPerPage={10}
                             pagination
                             scopedSlots={{
-                                'status':
-                                    (item) => (
-                                        <td>
-                                            <CBadge color={getBadge(item.status)}>
-                                                {item.status}
-                                            </CBadge>
-                                        </td>
-                                    ),
                                 'action(s)': (item) => (
                                     <td>
                                         <Link
                                             className='mr-2'
-                                            to={`/help/${item.id}/edit`}
+                                            /*  to={`/edit-appointment/${item.id}`} */
+                                            to='#'
                                             onClick={() => console.log("write a api for calling data by id")}
                                             title="Edit"
                                         >

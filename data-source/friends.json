@@ -1,0 +1,67 @@
+{
+  "allfriends": [
+    {
+      "firstName": "Harshit",
+      "lastName": "Kishor",
+      "email": "harshit@gmail.com",
+      "mobile": "1234567890",
+      "age": "23",
+      "streetName": "Soutch City",
+      "city": "Lucknow",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "pinCode": "226014",
+      "preferences": "Male",
+      "package": "Free",
+      "id": 1
+    },
+    {
+      "firstName": "Ravi",
+      "lastName": "Verma",
+      "email": "ravi@gmail.com",
+      "mobile": "08767675645",
+      "age": "24",
+      "streetName": "Millanium Road",
+      "city": "Lucknow",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "pinCode": "226014",
+      "preferences": "Male",
+      "package": "Starter",
+      "id": 2
+    },
+    {
+      "firstName": "Ravi",
+      "lastName": "Verma",
+      "email": "ravi@gmail.com",
+      "mobile": "08767675645",
+      "age": "24",
+      "streetName": "Millanium Road",
+      "city": "Lucknow",
+      "state": "Uttar Pradesh",
+      "country": "India",
+      "pinCode": "226014",
+      "preferences": "Male",
+      "package": "Starter",
+      "id": 3
+    }
+  ],
+  "contactUs": [
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "mobile": "",
+      "message": "",
+      "id": 1
+    },
+    {
+      "firstName": "Harshit",
+      "lastName": "Kishor",
+      "email": "harshit+1000@gmail.com",
+      "mobile": "34434322213",
+      "message": "df\nvf\nbg\n\nb",
+      "id": 2
+    }
+  ]
+}
