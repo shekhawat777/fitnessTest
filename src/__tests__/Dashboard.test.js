@@ -1,8 +1,16 @@
-import React from 'react'
-import { shallow } from 'enzyme/build'
-import Dashboard from '../views/dashboard/Dashboard';
+import React, { Component } from "react";
+import Dashboard from "../views/dashboard/Dashboard";
+import { render } from "@testing-library/react";
+describe("Dashboard", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = render(<Dashboard />);
+  });
+  it("should render successfully", () => {
+    expect(wrapper).toBeTruthy();
+  });
 
-it('mounts DashBoard without crashing', () => {
-    const wrapper = shallow(<Dashboard />)
-    wrapper.unmount()
-})
+  it("should have a greeting as the title", () => {
+    expect(wrapper.getByText("Apply for Trainer")).toBeTruthy();
+  });
+});
