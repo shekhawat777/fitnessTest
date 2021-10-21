@@ -52,7 +52,7 @@ const ContactUsView = ({ onFormSubmit, initialValues }) => {
                                         <CCol xs="6">
                                             <CFormGroup>
                                                 <CLabel htmlFor="email">Email</CLabel>
-                                                <CInput autoComplete="nope" id="email" placeholder="Enter Email" name="email" {...formik.getFieldProps('email')} />
+                                                <CInput autoComplete="nope" id="email" placeholder="Enter email" name="email" {...formik.getFieldProps('email')} />
                                                 <ErrorMessage name="email" render={msg => <ErrorLable msg={msg} />} />
                                             </CFormGroup>
                                         </CCol>

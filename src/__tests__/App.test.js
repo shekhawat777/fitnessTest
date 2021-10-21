@@ -36,3 +36,21 @@ it('mounts ViewAppointment without crashing', () => {
   expect(wrapper.getElements()).toMatchSnapshot();
   wrapper.unmount()
 })
+
+/* describe('Contact US Validation test', () => {
+    it('mounts ContactUsView without crashing', () => {
+        const wrapper = shallow(<ContactUsView onFormSubmit={onFormSubmit} initialValues={initialValues} />)
+        wrapper.unmount()
+    })
+    it('validates model on button click', async () => {
+        const wrapper = mount(
+            <ContactUsView onFormSubmit={onFormSubmit} initialValues={initialValues} />
+        );
+        // console.log(wrapper.debug());
+        expect(wrapper.find('.btn').type()).toEqual('button');
+        wrapper.find('[tag="form"]').simulate('submit', onFormSubmit)
+
+    });
+
+    await act(() => Promise.resolve()); // To avoid act wrapping warning
+}) */
