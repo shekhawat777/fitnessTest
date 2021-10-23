@@ -121,7 +121,7 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                                 <CRow>
                                                     <CCol>
                                                         <input
-                                                            id='male'
+                                                            id='malePreference'
                                                             name="trainerPreferences"
                                                             type="radio"
                                                             value="Male"
@@ -132,7 +132,7 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                                     </CCol>
                                                     <CCol>
                                                         <input
-                                                            id='female'
+                                                            id='femalePreference'
                                                             type="radio"
                                                             name="trainerPreferences"
                                                             value="Female"
@@ -143,7 +143,7 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                                     </CCol>
                                                     <CCol>
                                                         <input
-                                                            id='no'
+                                                            id='noPreference'
                                                             type="radio"
                                                             name="trainerPreferences"
                                                             value="No"
@@ -270,7 +270,7 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                         </CCol>
                                     </CFormGroup>
 
-                                    <CButton type="submit" color="primary">Submit</CButton>
+                                    <CButton id="button" type="submit" color="primary">Submit</CButton>
                                 </CForm>
                             )}
                         </Formik>

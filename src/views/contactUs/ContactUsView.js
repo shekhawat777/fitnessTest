@@ -31,7 +31,7 @@ const ContactUsView = ({ onFormSubmit, initialValues }) => {
                             validationSchema={contactUsValidationSchema}
                         >
                             {formik => (
-                                <CForm onSubmit={formik.handleSubmit}>
+                                <CForm id="form" onSubmit={formik.handleSubmit}>
                                     <CFormGroup row className="my-0">
                                         <CCol xs="6">
                                             <CFormGroup>
@@ -74,7 +74,7 @@ const ContactUsView = ({ onFormSubmit, initialValues }) => {
                                         </CCol>
                                     </CFormGroup>
 
-                                    <CButton type="submit" color="primary">Submit</CButton>
+                                    <CButton id="button" type="submit" color="primary">Submit</CButton>
                                 </CForm>
                             )}
                         </Formik>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, queryByAttribute, waitFor } from '@testing-library/react';
 import ContactUsView from '../views/contactUs/ContactUsView';
 import { checkRequired, checkAlphabets, checkEmail } from '../reusable/utils';
-import axios from 'axios';
+import { apiService } from 'src/reusable/Api';
 
 const initialValues = {
     firstName: "",
@@ -12,20 +12,25 @@ const initialValues = {
     message: '',
 }
 const onFormSubmit = jest.fn();
+const getById = queryByAttribute.bind(null, 'id');
 
 const setup = () => {
     const utils = render(<ContactUsView initialValues={initialValues} onFormSubmit={onFormSubmit} />)
-    const fNameInput = utils.getByPlaceholderText('Enter first name');
-    const lNameInput = utils.getByPlaceholderText('Enter last name');
-    const email = utils.getByPlaceholderText('Enter email');
-    const mobile = utils.getByPlaceholderText('Enter Mobile No');
-    const message = utils.getByPlaceholderText('Enter Message');
+    const fNameInput = getById(utils.container, 'firstName');
+    const lNameInput = getById(utils.container, 'lastName');
+    const email = getById(utils.container, 'email');
+    const mobile = getById(utils.container, 'mobile');
+    const message = getById(utils.container, 'message');
+    const button = getById(utils.container, 'button');
+    const form = getById(utils.container, 'form');
     return {
         fNameInput,
         lNameInput,
         mobile,
         email,
         message,
+        button,
+        form,
         ...utils,
     }
 }
@@ -185,7 +190,8 @@ const contactUsEnteries = [
 describe('Contact US Integrate Test for api', () => {
     test.each(contactUsEnteries)('check combination for %s',
         async (contactUsEntry) => {
-            const { fNameInput, lNameInput, mobile, email, message } = setup()
+            const { fNameInput, lNameInput, mobile, email, message, button, form } = setup()
+
             const fNameRequired = checkRequired(contactUsEntry.firstName)
             const lNameRequired = checkRequired(contactUsEntry.lastName)
             const mobileRequired = checkRequired(contactUsEntry.mobile)
@@ -211,6 +217,8 @@ describe('Contact US Integrate Test for api', () => {
             fireEvent.blur(message);
             fireEvent.change(message, { target: { value: contactUsEntry.message } });
 
+            fireEvent.submit(form);
+
             if (!fNameRequired || !lNameRequired || !mobileRequired || !emailRequired || !messageRequired) {
                 expect(await screen.findByText(/required/i)).toBeTruthy();
             } else if (emailRequired && !emailValid) {
@@ -218,10 +226,14 @@ describe('Contact US Integrate Test for api', () => {
             } else if ((fNameRequired && !fNameAlpha) || (lNameRequired && !lNameAlpha)) {
                 expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
             } else {
-                await axios.post("http://localhost:3500/contactUs", contactUsEntry).then(res => {
-                    /*  console.log(res) */
-                    expect({ ...contactUsEntry, id: res.data.id }).toEqual(res.data)
-                    expect(res.status).toBe(201)
+                await waitFor(() => {
+                    expect(onFormSubmit).toHaveBeenCalled();
+                    expect(onFormSubmit).toHaveBeenCalledTimes(1);
+                    apiService('POST', '/contactUs', contactUsEntry)
+                        .then((res) => {
+                            expect({ ...contactUsEntry, id: res.data.id }).toEqual(res.data)
+                            expect(res.status).toBe(201)
+                        })
                 })
             }
             await act(() => Promise.resolve()); // To avoid act wrapping warning
