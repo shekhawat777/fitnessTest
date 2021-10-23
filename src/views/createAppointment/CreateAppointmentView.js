@@ -8,6 +8,7 @@ import {
     CForm,
     CFormGroup,
     CInput,
+    CInputRadio,
     CLabel,
     CRow,
 } from '@coreui/react'
@@ -114,18 +115,157 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                         </CCol>
                                     </CFormGroup>
                                     <CFormGroup row className="my-0">
-                                        <CCol xs="6">
+                                        <CCol xs="12">
                                             <CFormGroup>
-                                                <CLabel htmlFor="preferences">Preferences</CLabel>
-                                                <CInput id="preferences" placeholder="Select Preferences" name="preferences" {...formik.getFieldProps('preferences')} />
-                                                <ErrorMessage name="preferences" render={msg => <ErrorLable msg={msg} />} />
+                                                <CLabel htmlFor="trainerPreferences">Trainer Preferences</CLabel>
+                                                <CRow>
+                                                    <CCol>
+                                                        <input
+                                                            id='male'
+                                                            name="trainerPreferences"
+                                                            type="radio"
+                                                            value="Male"
+                                                            checked={formik.values.trainerPreferences === "Male"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span>Male Trainer</span>
+                                                    </CCol>
+                                                    <CCol>
+                                                        <input
+                                                            id='female'
+                                                            type="radio"
+                                                            name="trainerPreferences"
+                                                            value="Female"
+                                                            checked={formik.values.trainerPreferences === "Female"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span>Female Trainer</span>
+                                                    </CCol>
+                                                    <CCol>
+                                                        <input
+                                                            id='no'
+                                                            type="radio"
+                                                            name="trainerPreferences"
+                                                            value="No"
+                                                            checked={formik.values.trainerPreferences === "No"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span>No Preference</span>
+                                                    </CCol>
+                                                </CRow>
+                                                <ErrorMessage name="trainerPreferences" render={msg => <ErrorLable msg={msg} />} />
                                             </CFormGroup>
                                         </CCol>
+                                    </CFormGroup>
+                                    <CFormGroup row className="my-0">
+                                        <CCol xs="12">
+                                            <CFormGroup>
+                                                <CLabel htmlFor="physioRequired">Do you need Physiotherapist</CLabel>
+                                                <CRow>
+                                                    <CCol>
+                                                        <input
+                                                            id='physioRequired1'
+                                                            name="physioRequired"
+                                                            type="radio"
+                                                            value="Yes"
+                                                            checked={formik.values.physioRequired === "Yes"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span> Yes</span>
+                                                    </CCol>
+                                                    <CCol>
+                                                        <input
+                                                            id='physioRequired2'
+                                                            type="radio"
+                                                            name="physioRequired"
+                                                            value="No"
+                                                            checked={formik.values.physioRequired === "No"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span> No</span>
+                                                    </CCol>
+                                                </CRow>
+                                                <ErrorMessage name="physioRequired" render={msg => <ErrorLable msg={msg} />} />
+                                            </CFormGroup>
+                                        </CCol>
+                                    </CFormGroup>
+
+                                    <CFormGroup row className="my-0">
+                                        <CCol xs="12">
+                                            <CFormGroup>
+                                                <CLabel htmlFor="package">Select a package</CLabel>
+                                                <CCol>
+                                                    <CRow>
+                                                        <input
+                                                            id='package1'
+                                                            name="package"
+                                                            type="radio"
+                                                            value="One Time appointment"
+                                                            checked={formik.values.package === "One Time appointment"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span> One Time appointment(Rs. 500/-)</span>
+                                                    </CRow>
+                                                    <CRow>
+                                                        <input
+                                                            id='package2'
+                                                            type="radio"
+                                                            name="package"
+                                                            value="4 Sessions per week"
+                                                            checked={formik.values.package === "4 Sessions per week"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span> 4 Sessions per week (Rs. 400/-per session)</span>
+                                                    </CRow>
+                                                    <CRow>
+                                                        <input
+                                                            id='package3'
+                                                            type="radio"
+                                                            name="package"
+                                                            value="5 Sessions per week"
+                                                            checked={formik.values.package === "5 Sessions per week"}
+                                                            onChange={formik.handleChange}
+                                                        />
+                                                        <span> 5 Sessions per week (Rs. 300/-per session)</span>
+                                                    </CRow>
+                                                </CCol>
+                                                <ErrorMessage name="package" render={msg => <ErrorLable msg={msg} />} />
+                                            </CFormGroup>
+                                        </CCol>
+                                    </CFormGroup>
+                                    {
+                                        (formik.values.package === "5 Sessions per week" || formik.values.package === "4 Sessions per week") &&
+                                        <CFormGroup row className="my-0">
+                                            <CCol xs="6">
+                                                <CFormGroup>
+                                                    <CLabel htmlFor="weeks">Weeks</CLabel>
+                                                    <CInput
+                                                        id="weeks" placeholder="Enter Weeks" name="weeks" {...formik.getFieldProps('weeks')} />
+                                                    <ErrorMessage name="weeks" render={msg => <ErrorLable msg={msg} />} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CFormGroup>}
+                                    <CFormGroup row className="my-0">
                                         <CCol xs="6">
                                             <CFormGroup>
-                                                <CLabel htmlFor="package">Package</CLabel>
-                                                <CInput id="package" placeholder="Select Package" name="package" {...formik.getFieldProps('package')} />
-                                                <ErrorMessage name="package" render={msg => <ErrorLable msg={msg} />} />
+                                                <CLabel htmlFor="totalAmount">Amount(Rs.)</CLabel>
+                                                <CInput
+                                                    disabled
+                                                    id="totalAmount"
+                                                    placeholder="Total Amount"
+                                                    value={
+                                                        formik.values.totalAmount =
+                                                        formik.values.package === "One Time appointment" ? 500 :
+                                                            formik.values.package === "4 Sessions per week" ? (parseInt(formik.values.weeks) * 4 * 400) :
+                                                                formik.values.package === "5 Sessions per week" ? (parseInt(formik.values.weeks) * 5 * 300) :
+                                                                    0
+
+                                                    }
+                                                    name="totalAmount"
+                                                /* {...formik.getFieldProps('totalAmount')} */
+                                                />
+                                                {console.log("Values", formik.values)}
+                                                <ErrorMessage name="totalAmount" render={msg => <ErrorLable msg={msg} />} />
                                             </CFormGroup>
                                         </CCol>
                                     </CFormGroup>

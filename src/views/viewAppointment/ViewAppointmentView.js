@@ -9,20 +9,8 @@ import {
   CDataTable,
   CRow,
 } from "@coreui/react";
-const fields = [
-  "s.no",
-  "name",
-  "phone",
-  "email",
-  "age",
-  "completeaddress",
-  "trainerpreference",
-  "physiorequired",
-  "package",
-  "totalamount",
-];
 
-const ViewAppointmentView = ({ data }) => {
+const ViewAppointmentView = ({ data, fields }) => {
   return (
     <CRow>
       <CCol>
@@ -48,36 +36,35 @@ const ViewAppointmentView = ({ data }) => {
               itemsPerPage={10}
               pagination
               scopedSlots={{
-                "action(s)": (item) => (
+                'S.No.': (item, index) => (
                   <td>
-                    <Link
-                      className="mr-2"
-                      /*  to={`/edit-appointment/${item.id}`} */
-                      to="#"
-                      onClick={() =>
-                        console.log("write a api for calling data by id")
-                      }
-                      title="Edit"
-                    >
-                      <CIcon name="cil-pencil" className="mfe-2" title="Edit" />
-                    </Link>
-                    <Link
-                      className="mr-2"
-                      to="#"
-                      onClick={() =>
-                        console.log("write a api for deleting data by id")
-                      }
-                      title="Delete"
-                    >
-                      <CIcon
-                        name="cil-trash"
-                        className="mfe-2"
-                        title="Delete"
-                      />
-                    </Link>
+                    {
+                      index + 1
+                    }
                   </td>
                 ),
-              }}
+                'Name': (item, index) => (
+                  <td>
+                    {item.firstName} {item.lastName}
+                  </td>
+                ),
+                'email': (item) => (
+                  <td>
+                    {item.email}
+                  </td>
+                ),
+                'phone': (item) => (
+                  <td>
+                    {item.mobile}
+                  </td>
+                ),
+                'completeAddress': (item) => (
+                  <td>
+                    {`${item.streetName}, ${item.city}, ${item.state}, ${item.country}, ${item.pinCode}`}
+                  </td>
+                ),
+              }
+              }
             />
           </CCardBody>
         </CCard>

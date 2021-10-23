@@ -1,5 +1,5 @@
 export const checkRequired = (data) => {
-    return (!data) && (data !== '');
+    return (data) && (data !== '');
 }
 
 export const checkNumber = (number) => {
@@ -10,11 +10,6 @@ export const checkNumber = (number) => {
 export const checkAlphabets = (data) => {
     const dataRegx = /^[aA-zZ\s]+$/;
     return dataRegx.test(data);
-};
-
-export const checkNumber = (number) => {
-    const numberRegx = /^[0-9]+$/;
-    return numberRegx.test(number);
 };
 
 export const checkEmail = (email) => {

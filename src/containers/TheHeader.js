@@ -7,6 +7,7 @@ import {
   CHeaderNav,
   CHeaderNavItem,
   CHeaderNavLink,
+  CLabel,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -37,18 +38,19 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo" />
+        {/* <CIcon name="logo" height="48" alt="Logo" /> */}
+        <CLabel>Fitness Tracker</CLabel>
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to="/dashboard">Home</CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-3">
+          <CHeaderNavLink to="/view-appointment">View Appointments</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/create-appointment">Place Appointment</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/view-appointment">View Appointment</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/contact-us">Contact Us</CHeaderNavLink>

@@ -2,6 +2,7 @@ import React from 'react'
 
 import axios from 'axios';
 import CreateAppointmentView from './CreateAppointmentView';
+import { apiService } from 'src/reusable/Api';
 
 const CreateAppointment = () => {
     const initialValues = {
@@ -15,15 +16,18 @@ const CreateAppointment = () => {
         state: '',
         country: '',
         pinCode: '',
-        preferences: '',
+        trainerPreferences: '',
+        physioRequired: '',
+        weeks: 1,
         package: '',
+        totalAmount: 0
     }
 
     const onFormSubmit = async (values, { resetForm }) => {
-        console.log("Test Value", values)
-        await axios.post("http://localhost:3500/allfriends", values).then(res => {
-            resetForm()
-        })
+        apiService('POST', '/allfriends', values)
+            .then((res) => {
+                resetForm()
+            })
     }
     return (
         <>

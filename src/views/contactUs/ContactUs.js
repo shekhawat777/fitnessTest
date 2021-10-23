@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import ContactUsView from './ContactUsView';
+import { apiService } from 'src/reusable/Api';
 
 const ContactUs = () => {
 
@@ -14,9 +15,11 @@ const ContactUs = () => {
 
 
     const onFormSubmit = async (values, { resetForm }) => {
-        await axios.post("http://localhost:3500/contactUs", values).then(res => {
-            resetForm()
-        })
+        apiService('POST', '/contactUs', values)
+            .then((res) => {
+                console.log("Result===", res)
+                resetForm()
+            })
     }
     return (
         <>

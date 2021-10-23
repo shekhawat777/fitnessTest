@@ -12,8 +12,10 @@ const createAppointmentValidationSchema = Yup.object({
     city: Yup.string().required("City required."),
     state: Yup.string().required("State required."),
     pinCode: Yup.string().required("Pincode required.").matches(/^[0-9]+$/, "Only numbers are allowed for this field.").length(6, "Pinocde should be 6 digits"),
-    preferences: Yup.string().required("Preferences required."),
+    trainerPreferences: Yup.string().required("Preferences required."),
     package: Yup.string().required("Package required."),
+    physioRequired: Yup.string().required("Physiotherapist required."),
+    weeks: Yup.number().typeError("Only numbers are allowed for this field.").required("Weeks required.")
 })
 
 export default createAppointmentValidationSchema
