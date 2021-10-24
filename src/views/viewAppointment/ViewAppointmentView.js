@@ -23,6 +23,7 @@ const ViewAppointmentView = ({ data, fields }) => {
           </CCardHeader>
           <CCardBody>
             <CDataTable
+              id='table'
               items={data}
               fields={fields}
               tableFilter
