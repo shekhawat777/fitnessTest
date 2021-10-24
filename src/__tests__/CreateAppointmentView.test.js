@@ -83,23 +83,35 @@ const setup = () => {
 describe('Check firstName Field Validation', () => {
     test('firstName is required', async () => {
         const { fNameInput } = setup()
-        fireEvent.blur(fNameInput);
-        expect(await screen.findByText(/First name required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(fNameInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/First name required./i)).toBeTruthy();
+        })
     });
     test('firstName is invalid', async () => {
         const { fNameInput } = setup()
-        fireEvent.blur(fNameInput);
-        fireEvent.change(fNameInput, { target: { value: 'abc@def' } });
-        expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+        act(() => {
+            fireEvent.blur(fNameInput);
+            fireEvent.change(fNameInput, { target: { value: 'abc@def' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+        })
     });
     test('firstName is Valid', async () => {
         const { fNameInput } = setup()
-        fireEvent.blur(fNameInput);
-        fireEvent.change(fNameInput, { target: { value: 'Harshit Kishor' } });
-        const firstNameError1 = await screen.queryByText(/First name required./i);
-        const firstNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
-        expect(firstNameError1).toBeNull();
-        expect(firstNameError2).toBeNull();
+        act(() => {
+            fireEvent.blur(fNameInput);
+            fireEvent.change(fNameInput, { target: { value: 'Harshit Kishor' } });
+        })
+        await waitFor(async () => {
+            const firstNameError1 = await screen.queryByText(/First name required./i);
+            const firstNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
+            expect(firstNameError1).toBeNull();
+            expect(firstNameError2).toBeNull();
+        })
     });
 });
 
@@ -107,59 +119,91 @@ describe('Check firstName Field Validation', () => {
 describe('Check lastName Field Validation', () => {
     test('lastName is required', async () => {
         const { lNameInput } = setup()
-        fireEvent.blur(lNameInput);
-        expect(await screen.findByText(/Last name required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(lNameInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Last name required./i)).toBeTruthy();
+        })
     });
     test('lastName is invalid', async () => {
         const { lNameInput } = setup()
-        fireEvent.blur(lNameInput);
-        fireEvent.change(lNameInput, { target: { value: 'abc@def' } });
-        expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+        act(() => {
+            fireEvent.blur(lNameInput);
+            fireEvent.change(lNameInput, { target: { value: 'abc@def' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+        })
     });
     test('lastName is Valid', async () => {
         const { lNameInput } = setup()
-        fireEvent.blur(lNameInput);
-        fireEvent.change(lNameInput, { target: { value: 'Harshit Kishor' } });
-        const lastNameError1 = await screen.queryByText(/Last name required./i);
-        const lastNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
-        expect(lastNameError1).toBeNull();
-        expect(lastNameError2).toBeNull();
+        act(() => {
+            fireEvent.blur(lNameInput);
+            fireEvent.change(lNameInput, { target: { value: 'Harshit Kishor' } });
+        })
+        await waitFor(async () => {
+            const lastNameError1 = await screen.queryByText(/Last name required./i);
+            const lastNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
+            expect(lastNameError1).toBeNull();
+            expect(lastNameError2).toBeNull();
+        })
     });
 });
 
 describe('Check Email Field Validation', () => {
     test('Email is required', async () => {
         const { emailInput } = setup()
-        fireEvent.blur(emailInput);
-        expect(await screen.findByText(/Email required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(emailInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Email required./i)).toBeTruthy();
+        })
     });
     test('Email is invalid', async () => {
         const { emailInput } = setup()
-        fireEvent.blur(emailInput);
-        fireEvent.change(emailInput, { target: { value: 'abc@def' } });
-        expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
+        act(() => {
+            fireEvent.blur(emailInput);
+            fireEvent.change(emailInput, { target: { value: 'abc@def' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
+        })
     });
     test('Email is Valid', async () => {
         const { emailInput } = setup()
-        fireEvent.blur(emailInput);
-        fireEvent.change(emailInput, { target: { value: 'abc@def.com' } });
-        const emailError = await screen.queryByText(/Invalid email./i);
-        expect(emailError).toBeNull();
+        act(() => {
+            fireEvent.blur(emailInput);
+            fireEvent.change(emailInput, { target: { value: 'abc@def.com' } });
+        })
+        await waitFor(async () => {
+            const emailError = await screen.queryByText(/Invalid email./i);
+            expect(emailError).toBeNull();
+        })
     });
 });
 
 describe('Check Mobile Field Validation', () => {
     test('Mobile is required', async () => {
         const { mobileInput } = setup()
-        fireEvent.blur(mobileInput);
-        expect(await screen.findByText(/Mobile Number required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(mobileInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Mobile Number required./i)).toBeTruthy();
+        })
     });
     test('Mobile is Valid', async () => {
         const { mobileInput } = setup()
-        fireEvent.blur(mobileInput);
-        fireEvent.change(mobileInput, { target: { value: '9987654545' } });
-        const mobileError = await screen.queryByText(/Mobile Number required./i);
-        expect(mobileError).toBeNull();
+        act(() => {
+            fireEvent.blur(mobileInput);
+            fireEvent.change(mobileInput, { target: { value: '9987654545' } });
+        })
+        await waitFor(async () => {
+            const mobileError = await screen.queryByText(/Mobile Number required./i);
+            expect(mobileError).toBeNull();
+        })
     });
 });
 
@@ -167,33 +211,53 @@ describe('Check Mobile Field Validation', () => {
 describe('Check Age Field Validation', () => {
     test('Age is required', async () => {
         const { ageInput } = setup()
-        fireEvent.blur(ageInput);
-        expect(await screen.findByText(/Age required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(ageInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Age required./i)).toBeTruthy();
+        })
     });
     test('Age is only number', async () => {
         const { ageInput } = setup()
-        fireEvent.blur(ageInput);
-        fireEvent.change(ageInput, { target: { value: '22tt121' } });
-        expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(ageInput);
+            fireEvent.change(ageInput, { target: { value: '22tt121' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();
+        })
     });
     test('Age must be greater than 18.', async () => {
         const { ageInput } = setup()
-        fireEvent.blur(ageInput);
-        fireEvent.change(ageInput, { target: { value: 15 } });
-        expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(ageInput);
+            fireEvent.change(ageInput, { target: { value: 15 } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
+        })
     });
     test('Age must be less than 60.', async () => {
         const { ageInput } = setup()
-        fireEvent.blur(ageInput);
-        fireEvent.change(ageInput, { target: { value: 61 } });
-        expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(ageInput);
+            fireEvent.change(ageInput, { target: { value: 61 } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
+        })
     });
     test('Age is Valid', async () => {
         const { ageInput } = setup()
-        fireEvent.blur(ageInput);
-        fireEvent.change(ageInput, { target: { value: 25 } });
-        const messageError = await screen.queryByText(/Age required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(ageInput);
+            fireEvent.change(ageInput, { target: { value: 25 } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/Age required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
@@ -201,168 +265,271 @@ describe('Check Age Field Validation', () => {
 describe('Check Street Name Field Validation', () => {
     test('Street Name is required', async () => {
         const { streetNameInput } = setup()
-        fireEvent.blur(streetNameInput);
-        expect(await screen.findByText(/Street name required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(streetNameInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Street name required./i)).toBeTruthy();
+        })
     });
     test('Street Name is Valid', async () => {
         const { streetNameInput } = setup()
-        fireEvent.blur(streetNameInput);
-        fireEvent.change(streetNameInput, { target: { value: 'Millanium Road' } });
-        const messageError = await screen.queryByText(/Street name required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(streetNameInput);
+            fireEvent.change(streetNameInput, { target: { value: 'Millanium Road' } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/Street name required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
 describe('Check Country Field Validation', () => {
     test('Country is required', async () => {
         const { countryInput } = setup()
-        fireEvent.blur(countryInput);
-        expect(await screen.findByText(/Country required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(countryInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Country required./i)).toBeTruthy();
+        })
     });
     test('Country is Valid', async () => {
         const { countryInput } = setup()
-        fireEvent.blur(countryInput);
-        fireEvent.change(countryInput, { target: { value: 'India' } });
-        const messageError = await screen.queryByText(/Country required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(countryInput);
+            fireEvent.change(countryInput, { target: { value: 'India' } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/Country required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
 describe('Check City Field Validation', () => {
     test('City is required', async () => {
         const { cityInput } = setup()
-        fireEvent.blur(cityInput);
-        expect(await screen.findByText(/City required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(cityInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/City required./i)).toBeTruthy();
+        })
     });
     test('City is Valid', async () => {
         const { cityInput } = setup()
-        fireEvent.blur(cityInput);
-        fireEvent.change(cityInput, { target: { value: 'Barabanki' } });
-        const messageError = await screen.queryByText(/City required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(cityInput);
+            fireEvent.change(cityInput, { target: { value: 'Barabanki' } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/City required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
 describe('Check State Field Validation', () => {
     test('State is required', async () => {
         const { stateInput } = setup()
-        fireEvent.blur(stateInput);
-        expect(await screen.findByText(/State required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(stateInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/State required./i)).toBeTruthy();
+        })
     });
     test('State is Valid', async () => {
         const { stateInput } = setup()
-        fireEvent.blur(stateInput);
-        fireEvent.change(stateInput, { target: { value: 'Uttar Pradesh' } });
-        const messageError = await screen.queryByText(/State required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(stateInput);
+            fireEvent.change(stateInput, { target: { value: 'Uttar Pradesh' } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/State required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
 describe('Check PinCode Field Validation', () => {
     test('PinCode is required', async () => {
         const { pinCodeInput } = setup()
-        fireEvent.blur(pinCodeInput);
-        expect(await screen.findByText(/Pincode required./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(pinCodeInput);
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Pincode required./i)).toBeTruthy();
+        })
     });
     test('PinCode is only number', async () => {
         const { pinCodeInput } = setup()
-        fireEvent.blur(pinCodeInput);
-        fireEvent.change(pinCodeInput, { target: { value: '22tt121' } });
-        expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(pinCodeInput);
+            fireEvent.change(pinCodeInput, { target: { value: '22tt121' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();
+        })
     });
     test('PinCode has only 6 digit', async () => {
         const { pinCodeInput } = setup()
-        fireEvent.blur(pinCodeInput);
-        fireEvent.change(pinCodeInput, { target: { value: '2287121' } });
-        expect(await screen.findByText(/Pinocde should be 6 digits/i)).toBeTruthy();;
+        act(() => {
+            fireEvent.blur(pinCodeInput);
+            fireEvent.change(pinCodeInput, { target: { value: '2287121' } });
+        })
+        await waitFor(async () => {
+            expect(await screen.findByText(/Pinocde should be 6 digits/i)).toBeTruthy();
+        })
     });
     test('PinCode is Valid', async () => {
         const { pinCodeInput } = setup()
-        fireEvent.blur(pinCodeInput);
-        fireEvent.change(pinCodeInput, { target: { value: '225121' } });
-        const messageError = await screen.queryByText(/Pincode required./i);
-        expect(messageError).toBeNull();
+        act(() => {
+            fireEvent.blur(pinCodeInput);
+            fireEvent.change(pinCodeInput, { target: { value: '225121' } });
+        })
+        await waitFor(async () => {
+            const messageError = await screen.queryByText(/Pincode required./i);
+            expect(messageError).toBeNull();
+        })
     });
 });
 
 describe('Check Trainer Preferences Validation', () => {
-    const { button, malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
     test('Trainer Preferences is required', async () => {
-        fireEvent.click(button)
-        expect(malePreferenceInput.checked).toEqual(false);
-        expect(femalePreferenceInput.checked).toEqual(false);
-        expect(noPreferenceInput.checked).toEqual(false);
-        expect(screen.findByText(/Preferences required./i)).toBeTruthy();
+        const { button, malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
+        /* act(()=>{
+
+        })
+        await waitFor(async()=>{
+
+        }) */
+        act(() => {
+            fireEvent.click(button)
+        })
+        await waitFor(async () => {
+            expect(malePreferenceInput.checked).toEqual(false);
+            expect(femalePreferenceInput.checked).toEqual(false);
+            expect(noPreferenceInput.checked).toEqual(false);
+            expect(await screen.findByText(/Preferences required./i)).toBeTruthy();
+        })
+
     });
     test('Trainer Preferences is Valid', async () => {
-        fireEvent.click(malePreferenceInput, { target: { value: "male" } });
-        expect(malePreferenceInput.checked).toEqual(true);
-        expect(femalePreferenceInput.checked).toEqual(false);
-        expect(noPreferenceInput.checked).toEqual(false);
-        expect(malePreferenceInput.value).toBe('male')
+        const { button, malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
+        act(() => {
+            fireEvent.click(malePreferenceInput, { target: { value: "Male" } });
+        })
+        await waitFor(async () => {
+            expect(malePreferenceInput.checked).toEqual(true);
+            expect(femalePreferenceInput.checked).toEqual(false);
+            expect(noPreferenceInput.checked).toEqual(false);
+            expect(malePreferenceInput.value).toBe('Male')
+        })
 
-        fireEvent.click(femalePreferenceInput, { target: { value: "female" } });
-        expect(malePreferenceInput.checked).toEqual(false);
-        expect(femalePreferenceInput.checked).toEqual(true);
-        expect(noPreferenceInput.checked).toEqual(false);
-        expect(femalePreferenceInput.value).toBe('female')
+        act(() => {
+            fireEvent.click(femalePreferenceInput, { target: { value: "Female" } });
+        })
+        await waitFor(async () => {
+            expect(malePreferenceInput.checked).toEqual(false);
+            expect(femalePreferenceInput.checked).toEqual(true);
+            expect(noPreferenceInput.checked).toEqual(false);
+            expect(femalePreferenceInput.value).toBe('Female')
+        })
 
-        fireEvent.click(noPreferenceInput, { target: { value: "no" } });
-        expect(malePreferenceInput.checked).toEqual(false);
-        expect(femalePreferenceInput.checked).toEqual(false);
-        expect(noPreferenceInput.checked).toEqual(true);
-        expect(noPreferenceInput.value).toBe('no')
+        act(() => {
+            fireEvent.click(noPreferenceInput, { target: { value: "No" } });
+        })
+        await waitFor(async () => {
+            expect(malePreferenceInput.checked).toEqual(false);
+            expect(femalePreferenceInput.checked).toEqual(false);
+            expect(noPreferenceInput.checked).toEqual(true);
+            expect(noPreferenceInput.value).toBe('No')
+        })
     });
 });
 
 describe('Check physioRequired Validation', () => {
-    const { button, physioInput1, physioInput2 } = setup()
     test('physioRequired is required', async () => {
-        fireEvent.click(button)
-        expect(physioInput1.checked).toEqual(false);
-        expect(physioInput2.checked).toEqual(false);
-        expect(screen.findByText(/Physiotherapist required./i)).toBeTruthy();
+        const { button, physioInput1, physioInput2 } = setup()
+        act(() => {
+            fireEvent.click(button)
+        })
+        await waitFor(async () => {
+            expect(physioInput1.checked).toEqual(false);
+            expect(physioInput2.checked).toEqual(false);
+            expect(await screen.findByText(/Physiotherapist required./i)).toBeTruthy();
+        })
     });
     test('physioRequired is Valid', async () => {
-        fireEvent.click(physioInput1, { target: { value: "Yes" } });
-        expect(physioInput1.checked).toEqual(true);
-        expect(physioInput2.checked).toEqual(false);
-        expect(physioInput1.value).toBe('Yes')
+        const { physioInput1, physioInput2 } = setup()
+        act(() => {
+            fireEvent.click(physioInput1, { target: { value: "Yes" } });
+        })
+        await waitFor(async () => {
+            expect(physioInput1.checked).toEqual(true);
+            expect(physioInput2.checked).toEqual(false);
+            expect(physioInput1.value).toBe('Yes')
+        })
 
-        fireEvent.click(physioInput2, { target: { value: "No" } });
-        expect(physioInput1.checked).toEqual(false);
-        expect(physioInput2.checked).toEqual(true);
-        expect(physioInput2.value).toBe('No')
+        act(() => {
+            fireEvent.click(physioInput2, { target: { value: "No" } });
+        })
+        await waitFor(async () => {
+            expect(physioInput1.checked).toEqual(false);
+            expect(physioInput2.checked).toEqual(true);
+            expect(physioInput2.value).toBe('No')
+        })
+
     });
 });
 
 describe('Package Validation', () => {
-    const { button, package1, package2, package3, packageInput } = setup()
     test('Package is required', async () => {
-        fireEvent.click(button)
-        expect(package1.checked).toEqual(false);
-        expect(package2.checked).toEqual(false);
-        expect(package3.checked).toEqual(false);
-        expect(screen.findByText(/Package required./i)).toBeTruthy();
+        const { button, package1, package2, package3 } = setup()
+        act(() => {
+            fireEvent.click(button)
+        })
+        await waitFor(async () => {
+            expect(package1.checked).toEqual(false);
+            expect(package2.checked).toEqual(false);
+            expect(package3.checked).toEqual(false);
+            expect(await screen.findByText(/Package required./i)).toBeTruthy();
+        })
     });
     test('Package is Valid', async () => {
-        fireEvent.click(package1, { target: { value: "One Time appointment" } });
-        expect(package1.checked).toEqual(true);
-        expect(package2.checked).toEqual(false);
-        expect(package3.checked).toEqual(false);
-        expect(package1.value).toBe('One Time appointment')
+        const { package1, package2, package3 } = setup()
+        act(() => {
+            fireEvent.click(package1, { target: { value: "One Time appointment" } });
+        })
+        await waitFor(async () => {
+            expect(package1.checked).toEqual(true);
+            expect(package2.checked).toEqual(false);
+            expect(package3.checked).toEqual(false);
+            expect(package1.value).toBe('One Time appointment')
+        })
 
-        fireEvent.click(package2, { target: { value: "4 Sessions per week" } });
-        expect(package1.checked).toEqual(false);
-        expect(package2.checked).toEqual(true);
-        expect(package3.checked).toEqual(false);
-        expect(package2.value).toBe('4 Sessions per week')
+        act(() => {
+            fireEvent.click(package2, { target: { value: "4 Sessions per week" } });
+        })
+        await waitFor(async () => {
+            expect(package1.checked).toEqual(false);
+            expect(package2.checked).toEqual(true);
+            expect(package3.checked).toEqual(false);
+            expect(package2.value).toBe('4 Sessions per week')
+        })
 
-        fireEvent.click(package3, { target: { value: "5 Sessions per week" } });
-        expect(package1.checked).toEqual(false);
-        expect(package2.checked).toEqual(false);
-        expect(package3.checked).toEqual(true);
-        expect(package3.value).toBe('5 Sessions per week')
+        act(() => {
+            fireEvent.click(package3, { target: { value: "5 Sessions per week" } });
+        })
+        await waitFor(async () => {
+            expect(package1.checked).toEqual(false);
+            expect(package2.checked).toEqual(false);
+            expect(package3.checked).toEqual(true);
+            expect(package3.value).toBe('5 Sessions per week')
+        })
     });
 });
 

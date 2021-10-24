@@ -59,10 +59,13 @@ Array [
           "lastName": "",
           "mobile": "",
           "package": "",
+          "physioRequired": "",
           "pinCode": "",
-          "preferences": "",
           "state": "",
           "streetName": "",
+          "totalAmount": 0,
+          "trainerPreferences": "",
+          "weeks": 1,
         }
       }
       onFormSubmit={[Function]}
@@ -161,19 +164,16 @@ Array [
     data={Array []}
     fields={
       Array [
-        "firstName",
-        "lastName",
+        "S.No.",
+        "Name",
         "email",
-        "mobile",
+        "phone",
         "age",
-        "streetName",
-        "city",
-        "state",
-        "country",
-        "pinCode",
-        "preferences",
+        "completeAddress",
+        "trainerPreferences",
+        "physioRequired",
         "package",
-        "action(s)",
+        "totalAmount",
       ]
     }
   />,
