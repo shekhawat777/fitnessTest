@@ -12,7 +12,7 @@ import {
 const getById = queryByAttribute.bind(null, 'id');
 
 const fields = ['S.No.', 'Name', 'email', 'phone', 'age', 'completeAddress', 'trainerPreferences', 'physioRequired', 'package', 'totalAmount']
-const data1 = [
+const testData = [
   {
     firstName: "Ravi",
     lastName: "Verma",
@@ -86,10 +86,9 @@ const data1 = [
     id: 4
   }
 ]
-const data = []
+
 
 describe("View Appointment Test cases", () => {
-  let testData = data
   test("It should render table", async () => {
     const { container } = render(<ViewAppointmentView fields={fields} data={testData} />)
     const rows = getAllRows(container)
