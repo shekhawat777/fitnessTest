@@ -1,6 +1,7 @@
 import React from 'react'
 import CreateAppointmentView from '../views/createAppointment/CreateAppointmentView';
-import { render, screen, fireEvent, queryByAttribute, act, queryAllByAttribute } from '@testing-library/react';
+import { render, screen, fireEvent, queryByAttribute, act, queryAllByAttribute, waitFor } from '@testing-library/react';
+
 
 const getById = queryByAttribute.bind(null, 'id');
 const getByName = queryAllByAttribute.bind(null, 'name');
@@ -46,8 +47,10 @@ const setup = () => {
     const package2 = getById(utils.container, 'package2');
     const package3 = getById(utils.container, 'package3');
     const weeksInput = getById(utils.container, 'weeks');
+    const totalAmountInput = getById(utils.container, 'totalAmount');
     const packageInput = getByName(utils.container, 'package');
     const button = getById(utils.container, 'button');
+    const form = getById(utils.container, 'form');
     return {
         fNameInput,
         lNameInput,
@@ -70,13 +73,14 @@ const setup = () => {
         package2,
         package3,
         packageInput,
+        totalAmountInput,
+        form,
         ...utils,
     }
 }
-
 /** ===========================Check All Validation for Input Fields========================= **/
 
-describe.skip('Check firstName Field Validation', () => {
+describe('Check firstName Field Validation', () => {
     test('firstName is required', async () => {
         const { fNameInput } = setup()
         fireEvent.blur(fNameInput);
@@ -100,7 +104,7 @@ describe.skip('Check firstName Field Validation', () => {
 });
 
 
-describe.skip('Check lastName Field Validation', () => {
+describe('Check lastName Field Validation', () => {
     test('lastName is required', async () => {
         const { lNameInput } = setup()
         fireEvent.blur(lNameInput);
@@ -123,7 +127,7 @@ describe.skip('Check lastName Field Validation', () => {
     });
 });
 
-describe.skip('Check Email Field Validation', () => {
+describe('Check Email Field Validation', () => {
     test('Email is required', async () => {
         const { emailInput } = setup()
         fireEvent.blur(emailInput);
@@ -144,7 +148,7 @@ describe.skip('Check Email Field Validation', () => {
     });
 });
 
-describe.skip('Check Mobile Field Validation', () => {
+describe('Check Mobile Field Validation', () => {
     test('Mobile is required', async () => {
         const { mobileInput } = setup()
         fireEvent.blur(mobileInput);
@@ -160,7 +164,7 @@ describe.skip('Check Mobile Field Validation', () => {
 });
 
 
-describe.skip('Check Age Field Validation', () => {
+describe('Check Age Field Validation', () => {
     test('Age is required', async () => {
         const { ageInput } = setup()
         fireEvent.blur(ageInput);
@@ -176,13 +180,13 @@ describe.skip('Check Age Field Validation', () => {
         const { ageInput } = setup()
         fireEvent.blur(ageInput);
         fireEvent.change(ageInput, { target: { value: 15 } });
-        expect(await screen.findByText(/Age must be greater than 18./i)).toBeTruthy();;
+        expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();;
     });
     test('Age must be less than 60.', async () => {
         const { ageInput } = setup()
         fireEvent.blur(ageInput);
         fireEvent.change(ageInput, { target: { value: 61 } });
-        expect(await screen.findByText(/Age must be less than 60./i)).toBeTruthy();;
+        expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();;
     });
     test('Age is Valid', async () => {
         const { ageInput } = setup()
@@ -194,7 +198,7 @@ describe.skip('Check Age Field Validation', () => {
 });
 
 
-describe.skip('Check Street Name Field Validation', () => {
+describe('Check Street Name Field Validation', () => {
     test('Street Name is required', async () => {
         const { streetNameInput } = setup()
         fireEvent.blur(streetNameInput);
@@ -209,7 +213,7 @@ describe.skip('Check Street Name Field Validation', () => {
     });
 });
 
-describe.skip('Check Country Field Validation', () => {
+describe('Check Country Field Validation', () => {
     test('Country is required', async () => {
         const { countryInput } = setup()
         fireEvent.blur(countryInput);
@@ -224,7 +228,7 @@ describe.skip('Check Country Field Validation', () => {
     });
 });
 
-describe.skip('Check City Field Validation', () => {
+describe('Check City Field Validation', () => {
     test('City is required', async () => {
         const { cityInput } = setup()
         fireEvent.blur(cityInput);
@@ -239,7 +243,7 @@ describe.skip('Check City Field Validation', () => {
     });
 });
 
-describe.skip('Check State Field Validation', () => {
+describe('Check State Field Validation', () => {
     test('State is required', async () => {
         const { stateInput } = setup()
         fireEvent.blur(stateInput);
@@ -254,7 +258,7 @@ describe.skip('Check State Field Validation', () => {
     });
 });
 
-describe.skip('Check PinCode Field Validation', () => {
+describe('Check PinCode Field Validation', () => {
     test('PinCode is required', async () => {
         const { pinCodeInput } = setup()
         fireEvent.blur(pinCodeInput);
@@ -281,14 +285,14 @@ describe.skip('Check PinCode Field Validation', () => {
     });
 });
 
-describe.skip('Check Trainer Preferences Validation', () => {
+describe('Check Trainer Preferences Validation', () => {
     const { button, malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
     test('Trainer Preferences is required', async () => {
         fireEvent.click(button)
         expect(malePreferenceInput.checked).toEqual(false);
         expect(femalePreferenceInput.checked).toEqual(false);
         expect(noPreferenceInput.checked).toEqual(false);
-        expect(await screen.findByText(/Preferences required./i)).toBeTruthy();;
+        expect(screen.findByText(/Preferences required./i)).toBeTruthy();
     });
     test('Trainer Preferences is Valid', async () => {
         fireEvent.click(malePreferenceInput, { target: { value: "male" } });
@@ -311,13 +315,13 @@ describe.skip('Check Trainer Preferences Validation', () => {
     });
 });
 
-describe.skip('Check physioRequired Validation', () => {
+describe('Check physioRequired Validation', () => {
     const { button, physioInput1, physioInput2 } = setup()
     test('physioRequired is required', async () => {
         fireEvent.click(button)
         expect(physioInput1.checked).toEqual(false);
         expect(physioInput2.checked).toEqual(false);
-        expect(await screen.findByText(/Physiotherapist required./i)).toBeTruthy();;
+        expect(screen.findByText(/Physiotherapist required./i)).toBeTruthy();
     });
     test('physioRequired is Valid', async () => {
         fireEvent.click(physioInput1, { target: { value: "Yes" } });
@@ -332,14 +336,14 @@ describe.skip('Check physioRequired Validation', () => {
     });
 });
 
-describe.skip('Package Validation', () => {
+describe('Package Validation', () => {
     const { button, package1, package2, package3, packageInput } = setup()
     test('Package is required', async () => {
         fireEvent.click(button)
         expect(package1.checked).toEqual(false);
         expect(package2.checked).toEqual(false);
         expect(package3.checked).toEqual(false);
-        expect(await screen.findByText(/Package required./i)).toBeTruthy();;
+        expect(screen.findByText(/Package required./i)).toBeTruthy();
     });
     test('Package is Valid', async () => {
         fireEvent.click(package1, { target: { value: "One Time appointment" } });

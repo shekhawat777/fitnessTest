@@ -6,7 +6,7 @@ const createAppointmentValidationSchema = Yup.object({
     lastName: Yup.string().required("Last name required.").matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field. "),
     email: Yup.string().email("Invalid email.").required("Email required."),
     mobile: Yup.string().required("Mobile Number required."),
-    age: Yup.number().typeError("Only numbers are allowed for this field.").required("Age required.").min(19, "Age must be greater than 18.").max(59, "Age must be less than 60."),
+    age: Yup.number().typeError("Only numbers are allowed for this field.").required("Age required.").min(19, "Age must be greater than 18 and less than 60.").max(59, "Age must be greater than 18 and less than 60."),
     streetName: Yup.string().required("Street name required."),
     country: Yup.string().required("Country required."),
     city: Yup.string().required("City required."),

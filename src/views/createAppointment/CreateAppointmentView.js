@@ -33,7 +33,7 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                             validationSchema={createAppointmentValidationSchema}
                         >
                             {formik => (
-                                <CForm autoComplete="Off" onSubmit={formik.handleSubmit}>
+                                <CForm id="form" autoComplete="Off" onSubmit={formik.handleSubmit}>
                                     <CFormGroup row className="my-0">
                                         <CCol xs="6">
                                             <CFormGroup>
@@ -233,18 +233,22 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                             </CFormGroup>
                                         </CCol>
                                     </CFormGroup>
-                                    {
-                                        (formik.values.package === "5 Sessions per week" || formik.values.package === "4 Sessions per week") &&
-                                        <CFormGroup row className="my-0">
-                                            <CCol xs="6">
-                                                <CFormGroup>
-                                                    <CLabel htmlFor="weeks">Weeks</CLabel>
-                                                    <CInput
-                                                        id="weeks" placeholder="Enter Weeks" name="weeks" {...formik.getFieldProps('weeks')} />
-                                                    <ErrorMessage name="weeks" render={msg => <ErrorLable msg={msg} />} />
-                                                </CFormGroup>
-                                            </CCol>
-                                        </CFormGroup>}
+
+                                    <CFormGroup row className="my-0">
+                                        <CCol xs="6">
+                                            <CFormGroup>
+                                                <CLabel htmlFor="weeks">Weeks</CLabel>
+                                                <CInput
+                                                    disabled={(formik.values.package === "5 Sessions per week" || formik.values.package === "4 Sessions per week")}
+                                                    id="weeks"
+                                                    placeholder="Enter Weeks"
+                                                    name="weeks"
+                                                    {...formik.getFieldProps('weeks')}
+                                                />
+                                                <ErrorMessage name="weeks" render={msg => <ErrorLable msg={msg} />} />
+                                            </CFormGroup>
+                                        </CCol>
+                                    </CFormGroup>
                                     <CFormGroup row className="my-0">
                                         <CCol xs="6">
                                             <CFormGroup>
@@ -264,7 +268,6 @@ const CreateAppointmentView = ({ onFormSubmit, initialValues }) => {
                                                     name="totalAmount"
                                                 /* {...formik.getFieldProps('totalAmount')} */
                                                 />
-                                                {console.log("Values", formik.values)}
                                                 <ErrorMessage name="totalAmount" render={msg => <ErrorLable msg={msg} />} />
                                             </CFormGroup>
                                         </CCol>
