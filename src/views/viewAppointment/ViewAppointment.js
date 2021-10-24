@@ -21,7 +21,7 @@ const ViewAppointment = () => {
     }, [])
 
     return (
-        <ViewAppointmentView data={[]} fields={fields} />
+        <ViewAppointmentView data={data} fields={fields} />
     )
 }
 
