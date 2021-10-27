@@ -9,6 +9,15 @@ import {
   getAllRowsByRowgroupType
 } from 'testing-library-table-queries'
 
+//==== test cases For txt file===============
+import write from 'write'
+let data = []
+const writeFn = (testData) => {
+  data.push(testData)
+  write.sync('output/json/ViewAppointment_test_report.json', JSON.stringify(data), { newline: true })
+  write.sync('output/text/ViewAppointment_test_report.txt', JSON.stringify(data), { newline: true })
+}
+
 const getById = queryByAttribute.bind(null, 'id');
 
 const fields = ['S.No.', 'Name', 'email', 'phone', 'age', 'completeAddress', 'trainerPreferences', 'physioRequired', 'package', 'totalAmount']
@@ -98,27 +107,38 @@ describe("View Appointment Test cases", () => {
     const tBodyRow = getAllRowsByRowgroupType(container, 'tbody')
 
     expect(await screen.findByText(/View Appointment/i)).toBeTruthy();
+    writeFn({ Should_have_View_Appointment_as_the_title: true })
 
     if (testData.length) {
       expect(await screen.queryByText(/No items/i)).toBeFalsy();
+      writeFn({ Should_Not_have_NoItem_Message_For_DataSet: true })
       expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
+      writeFn({ Should_have_CompleteAddress_ColumnName: true })
       //Test number of rows and cells
       expect(rows).toHaveLength(testData.length + 1);
       expect(tBodyRow).toHaveLength(testData.length)
+      writeFn({ Should_have_TableBody_With_Data: true })
       expect(cells).toHaveLength((fields.length * (testData.length + 1)))
       //Test header/footer visibility
       expect(header).toBeTruthy();
+      writeFn({ Should_have_Header_Of_Table: true })
       expect(footer).toBeFalsy();
       expect(footer).toBeNull();
+      writeFn({ Should_NOT_have_Footer_Of_Table: true })
 
     } else {
       expect(await screen.queryByText(/No items/i)).toBeTruthy();
+      writeFn({ Should_have_NoItem_Message_For_No_DataSet: true })
       expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
+      writeFn({ Should_have_CompleteAddress_ColumnName: true })
       expect(rows).toHaveLength(2);
       expect(tBodyRow).toHaveLength(1)
+      writeFn({ Should_have_EmptyTableBody: true })
       expect(cells).toHaveLength(fields.length + 1)
       expect(header).toBeTruthy();
+      writeFn({ Should_have_Header_Of_Table: true })
       expect(footer).toBeNull();
+      writeFn({ Should_NOT_have_Footer_Of_Table: true })
     }
   })
 })

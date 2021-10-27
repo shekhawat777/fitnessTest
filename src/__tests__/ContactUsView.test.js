@@ -1,8 +1,14 @@
 import React from 'react'
 import { render, screen, fireEvent, act, queryByAttribute, waitFor } from '@testing-library/react';
 import ContactUsView from '../views/contactUs/ContactUsView';
-import { checkRequired, checkAlphabets, checkEmail } from '../reusable/utils';
-import { apiService } from 'src/reusable/Api';
+//==== test cases For txt file===============
+import write from 'write'
+let data = []
+const writeFn = (testData) => {
+    data.push(testData)
+    write.sync('output/json/contactusView_test_report.json', JSON.stringify(data), { newline: true })
+    write.sync('output/text/contactusView_test_report.txt', JSON.stringify(data), { newline: true })
+}
 
 const initialValues = {
     firstName: "",
@@ -43,6 +49,7 @@ describe('Check Email Field Validation', () => {
         fireEvent.blur(email);
         await waitFor(async () => {
             expect(await screen.findByText(/Email required./i)).toBeTruthy();
+            writeFn({ Email_is_required: true })
         })
 
     });
@@ -55,6 +62,7 @@ describe('Check Email Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
+            writeFn({ Email_is_invalid: true })
         })
 
     });
@@ -68,13 +76,14 @@ describe('Check Email Field Validation', () => {
         await waitFor(async () => {
             const emailError = await screen.queryByText(/Invalid email./i);
             expect(emailError).toBeNull();
+            writeFn({ Email_is_valid: true })
         })
 
     });
 });
 
 
-describe('Check firstName Field Validation', () => {
+describe('Check FirstName Field Validation', () => {
 
     test('firstName is required', async () => {
         const { fNameInput } = setup()
@@ -83,6 +92,7 @@ describe('Check firstName Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/First name required./i)).toBeTruthy();
+            writeFn({ FirstName_is_required: true })
         })
 
     });
@@ -95,6 +105,7 @@ describe('Check firstName Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+            writeFn({ FirstName_is_invalid: true })
         })
 
     });
@@ -110,13 +121,14 @@ describe('Check firstName Field Validation', () => {
             const firstNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(firstNameError1).toBeNull();
             expect(firstNameError2).toBeNull();
+            writeFn({ FirstName_is_valid: true })
         })
 
     });
 });
 
 
-describe('Check lastName Field Validation', () => {
+describe('Check LastName Field Validation', () => {
 
     test('lastName is required', async () => {
         const { lNameInput } = setup()
@@ -125,6 +137,7 @@ describe('Check lastName Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Last name required./i)).toBeTruthy();
+            writeFn({ LastName_is_required: true })
         })
 
     });
@@ -137,6 +150,7 @@ describe('Check lastName Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+            writeFn({ LastName_is_invalid: true })
         })
 
     });
@@ -152,6 +166,7 @@ describe('Check lastName Field Validation', () => {
             const lastNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(lastNameError1).toBeNull();
             expect(lastNameError2).toBeNull();
+            writeFn({ LastName_is_valid: true })
         })
 
     });
@@ -167,6 +182,7 @@ describe('Check Message Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Message required./i)).toBeTruthy();
+            writeFn({ Message_is_required: true })
         })
 
     });
@@ -180,6 +196,7 @@ describe('Check Message Field Validation', () => {
         await waitFor(async () => {
             const messageError = await screen.queryByText(/Message required./i);
             expect(messageError).toBeNull();
+            writeFn({ Message_is_valid: true })
         })
 
     });
@@ -194,6 +211,7 @@ describe('Check Mobile Field Validation', () => {
         });
         await waitFor(async () => {
             expect(await screen.findByText(/Mobile Number required./i)).toBeTruthy();
+            writeFn({ Mobile_is_required: true })
         })
 
     });
@@ -207,76 +225,10 @@ describe('Check Mobile Field Validation', () => {
         await waitFor(async () => {
             const mobileError = await screen.queryByText(/Mobile Number required./i);
             expect(mobileError).toBeNull();
+            writeFn({ Mobile_is_valid: true })
         })
 
     });
 });
-
-/** ===========================End========================= **/
-/* ============================== E2E Test=================== */
-
-const contactUsEnteries = [
-    { firstName: "Harshit", lastName: "Kishor", email: "harshit+1000", mobile: "34434322213", message: "df\nvf\nbg\n\nb" },
-    { firstName: "", lastName: "Kishor", email: "view@gmail.com", mobile: "344", message: "ythgfhgh" },
-    { firstName: "Harsh6it", lastName: "", email: "view@gmail.com", mobile: "344", message: "ythgfhgh" },
-    { firstName: "Harshit", lastName: "Kis6hor", email: "", mobile: "344", message: "ythgfhgh" },
-    { firstName: "Harshit", lastName: "Kishor", email: "view@gmail.com", mobile: "344", message: "ythgfhgh" }
-]
-
-describe('Contact US Integrate Test for api', () => {
-    test.each(contactUsEnteries)('check combination for %s',
-        async (contactUsEntry) => {
-            const { fNameInput, lNameInput, mobile, email, message, button, form } = setup()
-
-            const fNameRequired = checkRequired(contactUsEntry.firstName)
-            const lNameRequired = checkRequired(contactUsEntry.lastName)
-            const mobileRequired = checkRequired(contactUsEntry.mobile)
-            const emailRequired = checkRequired(contactUsEntry.email)
-            const messageRequired = checkRequired(contactUsEntry.message)
-            const fNameAlpha = checkAlphabets(contactUsEntry.firstName)
-            const lNameAlpha = checkAlphabets(contactUsEntry.lastName)
-            const emailValid = checkEmail(contactUsEntry.email)
-
-
-            fireEvent.blur(fNameInput);
-            fireEvent.change(fNameInput, { target: { value: contactUsEntry.firstName } });
-
-            fireEvent.blur(lNameInput);
-            fireEvent.change(lNameInput, { target: { value: contactUsEntry.lastName } });
-
-            fireEvent.blur(mobile);
-            fireEvent.change(mobile, { target: { value: contactUsEntry.mobile } });
-
-            fireEvent.blur(email);
-            fireEvent.change(email, { target: { value: contactUsEntry.email } });
-
-            fireEvent.blur(message);
-            fireEvent.change(message, { target: { value: contactUsEntry.message } });
-
-            fireEvent.submit(form);
-
-            if (!fNameRequired || !lNameRequired || !mobileRequired || !emailRequired || !messageRequired) {
-                expect(await screen.findByText(/required/i)).toBeTruthy();
-            } else if (emailRequired && !emailValid) {
-                expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
-            } else if ((fNameRequired && !fNameAlpha) || (lNameRequired && !lNameAlpha)) {
-                expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
-            } else {
-                await waitFor(() => {
-                    expect(onFormSubmit).toHaveBeenCalled();
-                    expect(onFormSubmit).toHaveBeenCalledTimes(1);
-                    apiService('POST', '/contactUs', contactUsEntry)
-                        .then((res) => {
-                            expect({ ...contactUsEntry, id: res.data.id }).toEqual(res.data)
-                            expect(res.status).toBe(201)
-                        })
-                })
-            }
-            await act(() => Promise.resolve()); // To avoid act wrapping warning
-        }
-
-    )
-})
-
 
 /** ===========================End========================= **/

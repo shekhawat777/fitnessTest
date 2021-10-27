@@ -42,7 +42,8 @@
     "@testing-library/react": "^12.1.2",
     "auto-changelog": "~2.2.1",
     "react-scripts": "^4.0.3",
-    "testing-library-table-queries": "^0.1.2"
+    "testing-library-table-queries": "^0.1.2",
+    "write": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

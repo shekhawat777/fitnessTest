@@ -1,9 +1,16 @@
 import React from 'react'
 import { render, screen, fireEvent, queryByAttribute, act, queryAllByAttribute, waitFor } from '@testing-library/react';
-import { checkAge, checkAlphabets, checkEmail, checkNumber, checkRequired, pinCode } from 'src/reusable/utils';
+import { checkAge, checkAlphabets, checkEmail, checkNumber, checkRequired, pinCode } from '../reusable/utils';
 import { apiService } from '../reusable/Api';
-import CreateAppointmentView from 'src/views/createAppointment/CreateAppointmentView';
-
+import CreateAppointmentView from '../views/createAppointment/CreateAppointmentView';
+//==== test cases For txt file===============
+import write from 'write'
+let data = []
+const writeFn = (testData) => {
+    data.push(testData)
+    write.sync('output/json/CreateAppointment_Integrate_test_report.json', JSON.stringify(data), { newline: true })
+    write.sync('output/text/CreateAppointment_Integrate_test_report.txt', JSON.stringify(data), { newline: true })
+}
 
 const getById = queryByAttribute.bind(null, 'id');
 const getByName = queryAllByAttribute.bind(null, 'name');
@@ -89,6 +96,22 @@ const appointmentEnteries = [
         email: "ravi@gmail.com",
         mobile: "08767675645",
         age: "50",
+        streetName: "Millanium Road",
+        city: "Lucknow",
+        state: "Uttar Pradesh",
+        country: "India",
+        pinCode: "226016",
+        trainerPreferences: "Male",
+        physioRequired: "No",
+        weeks: "2",
+        package: "5 Sessions per week",
+    },
+    {
+        firstName: "Ravi",
+        lastName: "Verma",
+        email: "ravi@gmail.com",
+        mobile: "08767675645",
+        age: "",
         streetName: "Millanium Road",
         city: "Lucknow",
         state: "Uttar Pradesh",
@@ -192,25 +215,33 @@ describe('Place Appointment Integrate Test for api', () => {
 
             if (!fNameRequired || !lNameRequired || !mobileRequired || !emailRequired || !ageRequired || !streetNameRequired || !cityRequired || !stateRequired || !countryRequired || !pinCodeRequired || !trainerPreferencesRequired || !physioRequiredRequired || !weeksRequired || !packageRequired) {
                 expect(await screen.findAllByText(/required/i)).toBeTruthy();
+                writeFn({ Check_Required_Field_Validation: true })
             } else if (emailRequired && !emailValid) {
                 expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
+                writeFn({ Check_Invalid_Email_Validation: true })
             } else if ((fNameRequired && !fNameAlpha) || (lNameRequired && !lNameAlpha)) {
                 expect(await screen.findAllByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
+                writeFn({ Check_Alphabets_Field_Validation: true })
             } else if ((ageRequired && !ageNumberValid) || (pinCodeRequired && !pinCodeNumberValid) || (weeksRequired && !weeksNumberValid)) {
                 expect(await screen.findAllByText(/Only numbers are allowed for this field./i)).toBeTruthy();
+                writeFn({ Check_Number_Field_Validation: true })
             } else if (ageRequired && ageNumberValid && !ageValid) {
                 expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
+                writeFn({ Check_Age_Field_Validation_for_greater_than_18_and_less_than_60: true })
             } else if (pinCodeRequired && pinCodeNumberValid && !pinCodeValid) {
                 expect(await screen.findByText(/Pinocde should be 6 digits/i)).toBeTruthy();
+                writeFn({ Check_Pin_Code_Validation_should_be_6_digits: true })
             } else {
                 await waitFor(() => {
                     const data = { ...appointmentEntry, totalAmount }
                     expect(onFormSubmit).toHaveBeenCalled();
                     expect(onFormSubmit).toHaveBeenCalledTimes(1);
+                    writeFn({ Check_Form_Submit: true })
                     apiService('POST', '/allfriends', data)
                         .then((res) => {
                             expect({ ...data, id: res.data.id }).toEqual(res.data)
                             expect(res.status).toBe(201)
+                            writeFn({ Data_inserted_Successfully: true })
                         })
                 })
             }
