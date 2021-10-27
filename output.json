@@ -1,0 +1,574 @@
+{
+  "numFailedTestSuites": 1,
+  "numFailedTests": 0,
+  "numPassedTestSuites": 5,
+  "numPassedTests": 60,
+  "numPendingTestSuites": 0,
+  "numPendingTests": 0,
+  "numRuntimeErrorTestSuites": 1,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 6,
+  "numTotalTests": 60,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 5,
+    "total": 5,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1635274429786,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is required",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is required"
+        },
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is invalid"
+        },
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is Valid"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is required",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is required"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is invalid"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is required",
+          "location": null,
+          "status": "passed",
+          "title": "Email is required"
+        },
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "Email is invalid"
+        },
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Email is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Mobile Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Mobile Field Validation Mobile is required",
+          "location": null,
+          "status": "passed",
+          "title": "Mobile is required"
+        },
+        {
+          "ancestorTitles": ["Check Mobile Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Mobile Field Validation Mobile is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Mobile is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Age Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Age Field Validation Age is required",
+          "location": null,
+          "status": "passed",
+          "title": "Age is required"
+        },
+        {
+          "ancestorTitles": ["Check Age Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Age Field Validation Age is only number",
+          "location": null,
+          "status": "passed",
+          "title": "Age is only number"
+        },
+        {
+          "ancestorTitles": ["Check Age Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Age Field Validation Age must be greater than 18.",
+          "location": null,
+          "status": "passed",
+          "title": "Age must be greater than 18."
+        },
+        {
+          "ancestorTitles": ["Check Age Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Age Field Validation Age must be less than 60.",
+          "location": null,
+          "status": "passed",
+          "title": "Age must be less than 60."
+        },
+        {
+          "ancestorTitles": ["Check Age Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Age Field Validation Age is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Age is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Street Name Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Street Name Field Validation Street Name is required",
+          "location": null,
+          "status": "passed",
+          "title": "Street Name is required"
+        },
+        {
+          "ancestorTitles": ["Check Street Name Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Street Name Field Validation Street Name is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Street Name is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Country Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Country Field Validation Country is required",
+          "location": null,
+          "status": "passed",
+          "title": "Country is required"
+        },
+        {
+          "ancestorTitles": ["Check Country Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Country Field Validation Country is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Country is Valid"
+        },
+        {
+          "ancestorTitles": ["Check City Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check City Field Validation City is required",
+          "location": null,
+          "status": "passed",
+          "title": "City is required"
+        },
+        {
+          "ancestorTitles": ["Check City Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check City Field Validation City is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "City is Valid"
+        },
+        {
+          "ancestorTitles": ["Check State Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check State Field Validation State is required",
+          "location": null,
+          "status": "passed",
+          "title": "State is required"
+        },
+        {
+          "ancestorTitles": ["Check State Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check State Field Validation State is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "State is Valid"
+        },
+        {
+          "ancestorTitles": ["Check PinCode Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check PinCode Field Validation PinCode is required",
+          "location": null,
+          "status": "passed",
+          "title": "PinCode is required"
+        },
+        {
+          "ancestorTitles": ["Check PinCode Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check PinCode Field Validation PinCode is only number",
+          "location": null,
+          "status": "passed",
+          "title": "PinCode is only number"
+        },
+        {
+          "ancestorTitles": ["Check PinCode Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check PinCode Field Validation PinCode has only 6 digit",
+          "location": null,
+          "status": "passed",
+          "title": "PinCode has only 6 digit"
+        },
+        {
+          "ancestorTitles": ["Check PinCode Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check PinCode Field Validation PinCode is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "PinCode is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Trainer Preferences Validation"],
+          "failureMessages": [],
+          "fullName": "Check Trainer Preferences Validation Trainer Preferences is required",
+          "location": null,
+          "status": "passed",
+          "title": "Trainer Preferences is required"
+        },
+        {
+          "ancestorTitles": ["Check Trainer Preferences Validation"],
+          "failureMessages": [],
+          "fullName": "Check Trainer Preferences Validation Trainer Preferences is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Trainer Preferences is Valid"
+        },
+        {
+          "ancestorTitles": ["Check physioRequired Validation"],
+          "failureMessages": [],
+          "fullName": "Check physioRequired Validation physioRequired is required",
+          "location": null,
+          "status": "passed",
+          "title": "physioRequired is required"
+        },
+        {
+          "ancestorTitles": ["Check physioRequired Validation"],
+          "failureMessages": [],
+          "fullName": "Check physioRequired Validation physioRequired is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "physioRequired is Valid"
+        },
+        {
+          "ancestorTitles": ["Package Validation"],
+          "failureMessages": [],
+          "fullName": "Package Validation Package is required",
+          "location": null,
+          "status": "passed",
+          "title": "Package is required"
+        },
+        {
+          "ancestorTitles": ["Package Validation"],
+          "failureMessages": [],
+          "fullName": "Package Validation Package is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Package is Valid"
+        }
+      ],
+      "endTime": 1635274440047,
+      "message": "",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\CreateAppointmentView.test.js",
+      "startTime": 1635274431461,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is required",
+          "location": null,
+          "status": "passed",
+          "title": "Email is required"
+        },
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "Email is invalid"
+        },
+        {
+          "ancestorTitles": ["Check Email Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Email Field Validation Email is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Email is Valid"
+        },
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is required",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is required"
+        },
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is invalid"
+        },
+        {
+          "ancestorTitles": ["Check firstName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check firstName Field Validation firstName is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "firstName is Valid"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is required",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is required"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is invalid",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is invalid"
+        },
+        {
+          "ancestorTitles": ["Check lastName Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check lastName Field Validation lastName is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "lastName is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Message Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Message Field Validation Message is required",
+          "location": null,
+          "status": "passed",
+          "title": "Message is required"
+        },
+        {
+          "ancestorTitles": ["Check Message Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Message Field Validation Message is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Message is Valid"
+        },
+        {
+          "ancestorTitles": ["Check Mobile Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Mobile Field Validation Mobile is required",
+          "location": null,
+          "status": "passed",
+          "title": "Mobile is required"
+        },
+        {
+          "ancestorTitles": ["Check Mobile Field Validation"],
+          "failureMessages": [],
+          "fullName": "Check Mobile Field Validation Mobile is Valid",
+          "location": null,
+          "status": "passed",
+          "title": "Mobile is Valid"
+        },
+        {
+          "ancestorTitles": ["Contact US Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Contact US Integrate Test for api check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kishor',\n  email: 'harshit+1000',\n  mobile: '34434322213',\n  message: 'df\\nvf\\nbg\\n\\nb'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kishor',\n  email: 'harshit+1000',\n  mobile: '34434322213',\n  message: 'df\\nvf\\nbg\\n\\nb'\n}"
+        },
+        {
+          "ancestorTitles": ["Contact US Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Contact US Integrate Test for api check combination for {\n  firstName: '',\n  lastName: 'Kishor',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: '',\n  lastName: 'Kishor',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}"
+        },
+        {
+          "ancestorTitles": ["Contact US Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Contact US Integrate Test for api check combination for {\n  firstName: 'Harsh6it',\n  lastName: '',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: 'Harsh6it',\n  lastName: '',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}"
+        },
+        {
+          "ancestorTitles": ["Contact US Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Contact US Integrate Test for api check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kis6hor',\n  email: '',\n  mobile: '344',\n  message: 'ythgfhgh'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kis6hor',\n  email: '',\n  mobile: '344',\n  message: 'ythgfhgh'\n}"
+        },
+        {
+          "ancestorTitles": ["Contact US Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Contact US Integrate Test for api check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kishor',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: 'Harshit',\n  lastName: 'Kishor',\n  email: 'view@gmail.com',\n  mobile: '344',\n  message: 'ythgfhgh'\n}"
+        }
+      ],
+      "endTime": 1635274442477,
+      "message": "",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\ContactUsView.test.js",
+      "startTime": 1635274440117,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["Place Appointment Integrate Test for api"],
+          "failureMessages": [],
+          "fullName": "Place Appointment Integrate Test for api check combination for {\n  firstName: 'Ravi',\n  lastName: 'Verma',\n  email: 'ravi@gmail.com',\n  mobile: '08767675645',\n  age: '50',\n  streetName: 'Millanium Road',\n  city: 'Lucknow',\n  state: 'Uttar Pradesh',\n  country: 'India',\n  pinCode: '226016',\n  trainerPreferences: 'Male',\n  physioRequired: 'No',\n  weeks: '2',\n  package: '5 Sessions per week'\n}",
+          "location": null,
+          "status": "passed",
+          "title": "check combination for {\n  firstName: 'Ravi',\n  lastName: 'Verma',\n  email: 'ravi@gmail.com',\n  mobile: '08767675645',\n  age: '50',\n  streetName: 'Millanium Road',\n  city: 'Lucknow',\n  state: 'Uttar Pradesh',\n  country: 'India',\n  pinCode: '226016',\n  trainerPreferences: 'Male',\n  physioRequired: 'No',\n  weeks: '2',\n  package: '5 Sessions per week'\n}"
+        }
+      ],
+      "endTime": 1635274443936,
+      "message": "",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\CreateAppointment.Integrate.test.js",
+      "startTime": 1635274442522,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "mounts App without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "mounts App without crashing"
+        },
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "mounts DashBoard without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "mounts DashBoard without crashing"
+        },
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "mounts ContactUs without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "mounts ContactUs without crashing"
+        },
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "mounts CreateAppointment without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "mounts CreateAppointment without crashing"
+        },
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "mounts ViewAppointment without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "mounts ViewAppointment without crashing"
+        }
+      ],
+      "endTime": 1635274444561,
+      "message": "",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\App.test.js",
+      "startTime": 1635274443990,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": ["Dashboard"],
+          "failureMessages": [],
+          "fullName": "Dashboard should render successfully",
+          "location": null,
+          "status": "passed",
+          "title": "should render successfully"
+        },
+        {
+          "ancestorTitles": ["Dashboard"],
+          "failureMessages": [],
+          "fullName": "Dashboard should have a greeting as the title",
+          "location": null,
+          "status": "passed",
+          "title": "should have a greeting as the title"
+        }
+      ],
+      "endTime": 1635274445078,
+      "message": "",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\Dashboard.test.js",
+      "startTime": 1635274444600,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [],
+      "coverage": {},
+      "endTime": 1635274445651,
+      "message": "  \u001b[1m● \u001b[22mTest suite failed to run\n\n    Cannot find module 'testing-library-table-queries' from 'src/__tests__/ViewAppointmentView.test.js'\n\n    \u001b[0m \u001b[90m 2 |\u001b[39m \u001b[36mimport\u001b[39m \u001b[33mViewAppointmentView\u001b[39m \u001b[36mfrom\u001b[39m \u001b[32m\"../views/viewAppointment/ViewAppointmentView\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 3 |\u001b[39m \u001b[36mimport\u001b[39m { queryByAttribute\u001b[33m,\u001b[39m render\u001b[33m,\u001b[39m screen } \u001b[36mfrom\u001b[39m \u001b[32m\"@testing-library/react\"\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    \u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m \u001b[36mimport\u001b[39m {\u001b[0m\n    \u001b[0m \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 5 |\u001b[39m   getAllCells\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 6 |\u001b[39m   getAllRows\u001b[33m,\u001b[39m\u001b[0m\n    \u001b[0m \u001b[90m 7 |\u001b[39m   getByRowgroupType\u001b[33m,\u001b[39m\u001b[0m\n\n      \u001b[2mat Resolver.resolveModule (\u001b[22mnode_modules/jest-runtime/node_modules/jest-resolve/build/index.js\u001b[2m:306:11)\u001b[22m\n      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[0m\u001b[36msrc/__tests__/ViewAppointmentView.test.js\u001b[39m\u001b[0m\u001b[2m:4:1)\u001b[22m\n",
+      "name": "C:\\Users\\Shekhawat777\\Music\\track\\fitnessTest\\src\\__tests__\\ViewAppointmentView.test.js",
+      "startTime": 1635274445651,
+      "status": "failed",
+      "summary": ""
+    }
+  ],
+  "wasInterrupted": false
+}
