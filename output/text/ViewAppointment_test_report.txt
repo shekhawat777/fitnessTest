@@ -1,1 +1,6 @@
-[{"Should_have_View_Appointment_as_the_title":true},{"Should_Not_have_NoItem_Message_For_DataSet":true},{"Should_have_CompleteAddress_ColumnName":true},{"Should_have_TableBody_With_Data":true},{"Should_have_Header_Of_Table":true},{"Should_NOT_have_Footer_Of_Table":true}]
+Should_have_View_Appointment_as_the_title=true
+Should_Not_have_NoItem_Message_For_DataSet=true
+Should_have_CompleteAddress_ColumnName=true
+Should_have_TableBody_With_Data=true
+Should_have_Header_Of_Table=true
+Should_NOT_have_Footer_Of_Table=true

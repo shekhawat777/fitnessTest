@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Dashboard from "../views/dashboard/Dashboard";
 import { render } from "@testing-library/react";
 
@@ -7,8 +7,13 @@ import write from 'write'
 let data = []
 const writeFn = (testData) => {
   data.push(testData)
-  write.sync('output/json/dashboard_test_report.json', JSON.stringify(data), { newline: true })
-  write.sync('output/text/dashboard_test_report.txt', JSON.stringify(data), { newline: true })
+  let newData = []
+  data.map((obj) => {
+    let [key, val] = Object.entries(obj)[0];
+    return newData.push(`${key}=${val}`)
+  });
+  write.sync('output/text/dashboard_test_report.txt', newData.join('\n'), { newline: true })
+  write.sync('output/json/dashboard_test_report.json', JSON.stringify(newData), { newline: true })
 }
 
 describe("Dashboard", () => {

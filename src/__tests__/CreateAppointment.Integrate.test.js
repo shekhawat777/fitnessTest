@@ -8,8 +8,13 @@ import write from 'write'
 let data = []
 const writeFn = (testData) => {
     data.push(testData)
-    write.sync('output/json/CreateAppointment_Integrate_test_report.json', JSON.stringify(data), { newline: true })
-    write.sync('output/text/CreateAppointment_Integrate_test_report.txt', JSON.stringify(data), { newline: true })
+    let newData = []
+    data.map((obj) => {
+        let [key, val] = Object.entries(obj)[0];
+        return newData.push(`${key}=${val}`)
+    });
+    write.sync('output/text/CreateAppointment_Integrate_test_report.txt', newData.join('\n'), { newline: true })
+    write.sync('output/json/CreateAppointment_Integrate_test_report.json', JSON.stringify(newData), { newline: true })
 }
 
 const getById = queryByAttribute.bind(null, 'id');
@@ -127,7 +132,7 @@ const appointmentEnteries = [
 describe('Place Appointment Integrate Test for api', () => {
     test.each(appointmentEnteries)('check combination for %s',
         async (appointmentEntry) => {
-            const { fNameInput, lNameInput, emailInput, mobileInput, ageInput, totalAmountInput, streetNameInput, cityInput, stateInput, countryInput, pinCodeInput, malePreferenceInput, femalePreferenceInput, noPreferenceInput, physioInput1, physioInput2, weeksInput, button, package1, package2, package3, form } = setup()
+            const { fNameInput, lNameInput, emailInput, mobileInput, ageInput, totalAmountInput, streetNameInput, cityInput, stateInput, countryInput, pinCodeInput, malePreferenceInput, femalePreferenceInput, noPreferenceInput, physioInput1, physioInput2, weeksInput, package1, package2, package3, form } = setup()
             const fNameRequired = checkRequired(appointmentEntry.firstName)
             const lNameRequired = checkRequired(appointmentEntry.lastName)
             const mobileRequired = checkRequired(appointmentEntry.mobile)

@@ -6,8 +6,13 @@ import write from 'write'
 let data = []
 const writeFn = (testData) => {
     data.push(testData)
-    write.sync('output/json/CreateAppointmentView_test_report.json', JSON.stringify(data), { newline: true })
-    write.sync('output/text/CreateAppointmentView_test_report.txt', JSON.stringify(data), { newline: true })
+    let newData = []
+    data.map((obj) => {
+        let [key, val] = Object.entries(obj)[0];
+        return newData.push(`${key}=${val}`)
+    });
+    write.sync('output/text/CreateAppointmentView_test_report.txt', newData.join('\n'), { newline: true })
+    write.sync('output/json/CreateAppointmentView_test_report.json', JSON.stringify(newData), { newline: true })
 }
 
 
@@ -449,7 +454,7 @@ describe('Check Trainer Preferences Validation', () => {
 
     });
     test('Trainer Preferences is Valid', async () => {
-        const { button, malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
+        const { malePreferenceInput, femalePreferenceInput, noPreferenceInput } = setup()
         act(() => {
             fireEvent.click(malePreferenceInput, { target: { value: "Male" } });
         })

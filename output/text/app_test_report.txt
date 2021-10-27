@@ -1,1 +1,5 @@
-[{"Should_app_mount_without_crashing":true},{"Should_dashboard_mount_without_crashing":true},{"Should_contactUs_mount_without_crashing":true},{"Should_CreateAppointment_mount_without_crashing":true},{"Should_ViewAppointment_mount_without_crashing":true}]
+Should_app_mount_without_crashing=true
+Should_dashboard_mount_without_crashing=true
+Should_contactUs_mount_without_crashing=true
+Should_CreateAppointment_mount_without_crashing=true
+Should_ViewAppointment_mount_without_crashing=true

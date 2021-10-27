@@ -1,1 +1,2 @@
-[{"Check_Form_Submit":true},{"Data_inserted_Successfully":true},{"Check_Required_Field_Validation":true}]
+Check_Form_Submit=true
+Check_Required_Field_Validation=true
