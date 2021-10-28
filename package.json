@@ -43,12 +43,14 @@
     "auto-changelog": "~2.2.1",
     "react-scripts": "^4.0.3",
     "testing-library-table-queries": "^0.1.2",
-    "write": "^2.0.0"
+    "write": "^2.0.0",
+    "xmlbuilder": "^15.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --detectOpenHandles",
+    "jest": "react-scripts test --detectOpenHandles",
+    "test": "react-scripts test --detectOpenHandles --reporters=./custom-reporter.js",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject",

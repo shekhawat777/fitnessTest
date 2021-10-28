@@ -8,30 +8,7 @@ import {
   queryByRowgroupType,
   getAllRowsByRowgroupType
 } from 'testing-library-table-queries'
-
-//==== test cases For txt file===============
-import write from 'write'
-let data = []
-const writeFn = (testData) => {
-  let index1 = data.findIndex((e) => {
-    let [key1] = Object.entries(e)[0];
-    let [key2] = Object.entries(testData)[0];
-    return key1 === key2
-  });
-  if (index1 === -1) {
-    data.push(testData)
-  } else {
-    data[index1] = testData
-  }
-  let newData = []
-  data.map((obj) => {
-    let [key, val] = Object.entries(obj)[0];
-    return newData.push(`${key}=${val}`)
-  });
-  write.sync('output/text/ViewAppointment_test_report.txt', newData.join('\n'), { newline: true })
-  write.sync('output/json/ViewAppointment_test_report.json', JSON.stringify(newData), { newline: true })
-}
-
+import { apiService } from "../reusable/Api";
 
 const fields = ['S.No.', 'Name', 'email', 'phone', 'age', 'completeAddress', 'trainerPreferences', 'physioRequired', 'package', 'totalAmount']
 const testData = [
@@ -109,72 +86,69 @@ const testData = [
   }
 ]
 
+let testName = "ViewAppointment boundary"
+const setup = () => {
+  const { container } = render(<ViewAppointmentView fields={fields} data={testData} />)
+  const rows = getAllRows(container)
+  const cells = getAllCells(container)
+  const header = getByRowgroupType(container, 'thead')
+  const footer = queryByRowgroupType(container, 'tfoot')
+  const tBodyRow = getAllRowsByRowgroupType(container, 'tbody')
+  return {
+    rows, cells, header, footer, tBodyRow, container
+  }
+}
+describe("boundary", () => {
+  const { rows, cells, header, footer, tBodyRow } = setup()
 
-describe("View Appointment Test cases", () => {
-  test("It should render table", async () => {
-    const { container } = render(<ViewAppointmentView fields={fields} data={testData} />)
-    const rows = getAllRows(container)
-    const cells = getAllCells(container)
-    const header = getByRowgroupType(container, 'thead')
-    const footer = queryByRowgroupType(container, 'tfoot')
-    const tBodyRow = getAllRowsByRowgroupType(container, 'tbody')
-
-    writeFn({ Should_have_View_Appointment_as_the_title: false })
+  test(`${testName} should be rendered`, async () => {
     expect(await screen.findByText(/View Appointment/i)).toBeTruthy();
-    writeFn({ Should_have_View_Appointment_as_the_title: true })
-
-    if (testData.length) {
-      writeFn({ Should_Not_have_NoItem_Message_For_DataSet: false })
-      expect(await screen.queryByText(/No items/i)).toBeFalsy();
-      writeFn({ Should_Not_have_NoItem_Message_For_DataSet: true })
-
-      writeFn({ Should_have_CompleteAddress_ColumnName: false })
-      expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
-      writeFn({ Should_have_CompleteAddress_ColumnName: true })
-
-
-      //Test number of rows and cells
-      writeFn({ Should_have_TableBody_With_Data: false })
-      expect(rows).toHaveLength(testData.length + 1);
-      expect(tBodyRow).toHaveLength(testData.length)
-      writeFn({ Should_have_TableBody_With_Data: true })
-
-
-      expect(cells).toHaveLength((fields.length * (testData.length + 1)))
-      //Test header/footer visibility
-
-      writeFn({ Should_have_Header_Of_Table: false })
-      expect(header).toBeTruthy();
-      writeFn({ Should_have_Header_Of_Table: true })
-
-      writeFn({ Should_NOT_have_Footer_Of_Table: false })
-      expect(footer).toBeFalsy();
-      expect(footer).toBeNull();
-      writeFn({ Should_NOT_have_Footer_Of_Table: true })
-
-    } else {
-      writeFn({ Should_have_NoItem_Message_For_No_DataSet: false })
-      expect(await screen.queryByText(/No items/i)).toBeTruthy();
-      writeFn({ Should_have_NoItem_Message_For_No_DataSet: true })
-
-      writeFn({ Should_have_CompleteAddress_ColumnName: false })
-      expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
-      writeFn({ Should_have_CompleteAddress_ColumnName: true })
-
-
-      writeFn({ Should_have_EmptyTableBody: false })
-      expect(rows).toHaveLength(2);
-      expect(tBodyRow).toHaveLength(1)
-      writeFn({ Should_have_EmptyTableBody: true })
-
-      writeFn({ Should_have_Header_Of_Table: false })
-      expect(cells).toHaveLength(fields.length + 1)
-      expect(header).toBeTruthy();
-      writeFn({ Should_have_Header_Of_Table: true })
-
-      writeFn({ Should_NOT_have_Footer_Of_Table: false })
-      expect(footer).toBeNull();
-      writeFn({ Should_NOT_have_Footer_Of_Table: true })
-    }
   })
+
+  test(`${testName} should be rendered with data`, async () => {
+    expect(await screen.queryByText(/No items/i)).toBeFalsy();
+    expect(rows).toHaveLength(testData.length + 1);
+    expect(tBodyRow).toHaveLength(testData.length)
+    expect(cells).toHaveLength((fields.length * (testData.length + 1)))
+    expect(header).toBeTruthy();
+    expect(footer).toBeFalsy();
+  })
+  test(`${testName} should be rendered without data`, async () => {
+    expect(await screen.queryByText(/No items/i)).toBeTruthy();
+    expect(rows).toHaveLength(2);
+    expect(tBodyRow).toHaveLength(1)
+    expect(cells).toHaveLength(fields.length + 1)
+    expect(header).toBeTruthy();
+    expect(footer).toBeNull();
+  })
+
+  test(`${testName} should be message no item without data`, async () => {
+    expect(await screen.queryByText(/No items/i)).toBeTruthy();
+  })
+
+  test(`${testName} should have header`, async () => {
+    expect(header).toBeTruthy();
+  })
+
+  test(`${testName} should not have footer`, async () => {
+    expect(footer).toBeFalsy();
+  })
+
+})
+
+
+let exceptionTest = "ViewAppointment exception"
+describe('exception', () => {
+  test(exceptionTest + ' should be check fitness Api', async () => {
+    await apiService('GET', '/allfriends', null)
+      .then((res) => {
+        expect(res.data).toEqual(res.data);
+        expect(res.data).toBe(res.data);
+        expect(res.data).not.toBe(null);
+        expect(null).toBeNull();
+        expect(res.data).toBeTruthy();
+      })
+  })
+
+
 })

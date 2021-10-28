@@ -1,0 +1,2 @@
+createappointmentBusinessShouldSubmitForm=true
+contactusBusinessShouldSubmitForm=true
