@@ -1,5 +1,5 @@
-Check_Invalid_Email_Validation=true
 Check_Required_Field_Validation=true
-Check_Required_Field_Validation=true
-Check_Required_Field_Validation=true
-Check_Form_Submit=true
+Check_Invalid_Email_Validation=false
+Check_Alphabets_Field_Validation=false
+Check_Form_Submit=false
+Data_inserted_Successfully=false
