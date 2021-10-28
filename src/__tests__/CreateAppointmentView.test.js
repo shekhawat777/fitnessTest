@@ -109,6 +109,7 @@ describe('Check firstName Field Validation', () => {
             fireEvent.blur(fNameInput);
         })
         await waitFor(async () => {
+            writeFn({ FirstName_is_required: false })
             expect(await screen.findByText(/First name required./i)).toBeTruthy();
             writeFn({ FirstName_is_required: true })
         })
@@ -120,6 +121,7 @@ describe('Check firstName Field Validation', () => {
             fireEvent.change(fNameInput, { target: { value: 'abc@def' } });
         })
         await waitFor(async () => {
+            writeFn({ FirstName_is_invalid: false })
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
             writeFn({ FirstName_is_invalid: true })
         })
@@ -131,6 +133,7 @@ describe('Check firstName Field Validation', () => {
             fireEvent.change(fNameInput, { target: { value: 'Harshit Kishor' } });
         })
         await waitFor(async () => {
+            writeFn({ FirstName_is_valid: false })
             const firstNameError1 = await screen.queryByText(/First name required./i);
             const firstNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(firstNameError1).toBeNull();
@@ -148,6 +151,7 @@ describe('Check lastName Field Validation', () => {
             fireEvent.blur(lNameInput);
         })
         await waitFor(async () => {
+            writeFn({ LatsName_is_required: false })
             expect(await screen.findByText(/Last name required./i)).toBeTruthy();
             writeFn({ LatsName_is_required: true })
         })
@@ -159,6 +163,7 @@ describe('Check lastName Field Validation', () => {
             fireEvent.change(lNameInput, { target: { value: 'abc@def' } });
         })
         await waitFor(async () => {
+            writeFn({ LatsName_is_invalid: false })
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
             writeFn({ LatsName_is_invalid: true })
         })
@@ -170,6 +175,7 @@ describe('Check lastName Field Validation', () => {
             fireEvent.change(lNameInput, { target: { value: 'Harshit Kishor' } });
         })
         await waitFor(async () => {
+            writeFn({ LatsName_is_valid: false })
             const lastNameError1 = await screen.queryByText(/Last name required./i);
             const lastNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(lastNameError1).toBeNull();
@@ -186,6 +192,7 @@ describe('Check Email Field Validation', () => {
             fireEvent.blur(emailInput);
         })
         await waitFor(async () => {
+            writeFn({ Email_is_required: false })
             expect(await screen.findByText(/Email required./i)).toBeTruthy();
             writeFn({ Email_is_required: true })
         })
@@ -197,6 +204,7 @@ describe('Check Email Field Validation', () => {
             fireEvent.change(emailInput, { target: { value: 'abc@def' } });
         })
         await waitFor(async () => {
+            writeFn({ Email_is_invalid: false })
             expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
             writeFn({ Email_is_invalid: true })
         })
@@ -208,6 +216,7 @@ describe('Check Email Field Validation', () => {
             fireEvent.change(emailInput, { target: { value: 'abc@def.com' } });
         })
         await waitFor(async () => {
+            writeFn({ Email_is_valid: false })
             const emailError = await screen.queryByText(/Invalid email./i);
             expect(emailError).toBeNull();
             writeFn({ Email_is_valid: true })
@@ -222,6 +231,7 @@ describe('Check Mobile Field Validation', () => {
             fireEvent.blur(mobileInput);
         })
         await waitFor(async () => {
+            writeFn({ Mobile_is_required: false })
             expect(await screen.findByText(/Mobile Number required./i)).toBeTruthy();
             writeFn({ Mobile_is_required: true })
         })
@@ -233,6 +243,7 @@ describe('Check Mobile Field Validation', () => {
             fireEvent.change(mobileInput, { target: { value: '9987654545' } });
         })
         await waitFor(async () => {
+            writeFn({ Mobile_is_valid: false })
             const mobileError = await screen.queryByText(/Mobile Number required./i);
             expect(mobileError).toBeNull();
             writeFn({ Mobile_is_valid: true })
@@ -248,6 +259,7 @@ describe('Check Age Field Validation', () => {
             fireEvent.blur(ageInput);
         })
         await waitFor(async () => {
+            writeFn({ Age_is_required: false })
             expect(await screen.findByText(/Age required./i)).toBeTruthy();
             writeFn({ Age_is_required: true })
         })
@@ -259,6 +271,7 @@ describe('Check Age Field Validation', () => {
             fireEvent.change(ageInput, { target: { value: '22tt121' } });
         })
         await waitFor(async () => {
+            writeFn({ Age_should_be_number_required: false })
             expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();
             writeFn({ Age_should_be_number_required: true })
         })
@@ -270,6 +283,7 @@ describe('Check Age Field Validation', () => {
             fireEvent.change(ageInput, { target: { value: 15 } });
         })
         await waitFor(async () => {
+            writeFn({ Age_must_be_greater_than_18: false })
             expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
             writeFn({ Age_must_be_greater_than_18: true })
         })
@@ -281,6 +295,7 @@ describe('Check Age Field Validation', () => {
             fireEvent.change(ageInput, { target: { value: 61 } });
         })
         await waitFor(async () => {
+            writeFn({ Age_must_be_less_than_60: false })
             expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
             writeFn({ Age_must_be_less_than_60: true })
         })
@@ -292,6 +307,7 @@ describe('Check Age Field Validation', () => {
             fireEvent.change(ageInput, { target: { value: 25 } });
         })
         await waitFor(async () => {
+            writeFn({ Age_should_be_valid: false })
             const messageError = await screen.queryByText(/Age required./i);
             expect(messageError).toBeNull();
             writeFn({ Age_should_be_valid: true })
@@ -307,6 +323,7 @@ describe('Check Street Name Field Validation', () => {
             fireEvent.blur(streetNameInput);
         })
         await waitFor(async () => {
+            writeFn({ StreetName_is_required: false })
             expect(await screen.findByText(/Street name required./i)).toBeTruthy();
             writeFn({ StreetName_is_required: true })
         })
@@ -318,6 +335,7 @@ describe('Check Street Name Field Validation', () => {
             fireEvent.change(streetNameInput, { target: { value: 'Millanium Road' } });
         })
         await waitFor(async () => {
+            writeFn({ StreetName_should_be_valid: false })
             const messageError = await screen.queryByText(/Street name required./i);
             expect(messageError).toBeNull();
             writeFn({ StreetName_should_be_valid: true })
@@ -332,6 +350,7 @@ describe('Check Country Field Validation', () => {
             fireEvent.blur(countryInput);
         })
         await waitFor(async () => {
+            writeFn({ Country_is_required: false })
             expect(await screen.findByText(/Country required./i)).toBeTruthy();
             writeFn({ Country_is_required: true })
         })
@@ -343,6 +362,7 @@ describe('Check Country Field Validation', () => {
             fireEvent.change(countryInput, { target: { value: 'India' } });
         })
         await waitFor(async () => {
+            writeFn({ Country_is_valid: false })
             const messageError = await screen.queryByText(/Country required./i);
             expect(messageError).toBeNull();
             writeFn({ Country_is_valid: true })
@@ -357,6 +377,7 @@ describe('Check City Field Validation', () => {
             fireEvent.blur(cityInput);
         })
         await waitFor(async () => {
+            writeFn({ City_is_required: false })
             expect(await screen.findByText(/City required./i)).toBeTruthy();
             writeFn({ City_is_required: true })
         })
@@ -368,6 +389,7 @@ describe('Check City Field Validation', () => {
             fireEvent.change(cityInput, { target: { value: 'Barabanki' } });
         })
         await waitFor(async () => {
+            writeFn({ City_is_valid: false })
             const messageError = await screen.queryByText(/City required./i);
             expect(messageError).toBeNull();
             writeFn({ City_is_valid: true })
@@ -382,6 +404,7 @@ describe('Check State Field Validation', () => {
             fireEvent.blur(stateInput);
         })
         await waitFor(async () => {
+            writeFn({ State_is_required: false })
             expect(await screen.findByText(/State required./i)).toBeTruthy();
             writeFn({ State_is_required: true })
         })
@@ -393,6 +416,7 @@ describe('Check State Field Validation', () => {
             fireEvent.change(stateInput, { target: { value: 'Uttar Pradesh' } });
         })
         await waitFor(async () => {
+            writeFn({ State_is_valid: false })
             const messageError = await screen.queryByText(/State required./i);
             expect(messageError).toBeNull();
             writeFn({ State_is_valid: true })
@@ -407,6 +431,7 @@ describe('Check PinCode Field Validation', () => {
             fireEvent.blur(pinCodeInput);
         })
         await waitFor(async () => {
+            writeFn({ PinCode_is_required: false })
             expect(await screen.findByText(/Pincode required./i)).toBeTruthy();
             writeFn({ PinCode_is_required: true })
         })
@@ -418,6 +443,7 @@ describe('Check PinCode Field Validation', () => {
             fireEvent.change(pinCodeInput, { target: { value: '22tt121' } });
         })
         await waitFor(async () => {
+            writeFn({ PinCode_should_be_number: false })
             expect(await screen.findByText(/Only numbers are allowed for this field./i)).toBeTruthy();
             writeFn({ PinCode_should_be_number: true })
         })
@@ -429,6 +455,7 @@ describe('Check PinCode Field Validation', () => {
             fireEvent.change(pinCodeInput, { target: { value: '2287121' } });
         })
         await waitFor(async () => {
+            writeFn({ PinCode_should_be_6_digit_number: false })
             expect(await screen.findByText(/Pinocde should be 6 digits/i)).toBeTruthy();
             writeFn({ PinCode_should_be_6_digit_number: true })
         })
@@ -440,6 +467,7 @@ describe('Check PinCode Field Validation', () => {
             fireEvent.change(pinCodeInput, { target: { value: '225121' } });
         })
         await waitFor(async () => {
+            writeFn({ PinCode_is_valid: false })
             const messageError = await screen.queryByText(/Pincode required./i);
             expect(messageError).toBeNull();
             writeFn({ PinCode_is_valid: true })
@@ -454,6 +482,7 @@ describe('Check Trainer Preferences Validation', () => {
             fireEvent.click(button)
         })
         await waitFor(async () => {
+            writeFn({ Trainer_Preference_is_required: false })
             expect(malePreferenceInput.checked).toEqual(false);
             expect(femalePreferenceInput.checked).toEqual(false);
             expect(noPreferenceInput.checked).toEqual(false);
@@ -468,6 +497,7 @@ describe('Check Trainer Preferences Validation', () => {
             fireEvent.click(malePreferenceInput, { target: { value: "Male" } });
         })
         await waitFor(async () => {
+            writeFn({ Trainer_Preference_is_Valid_For_Male: false })
             expect(malePreferenceInput.checked).toEqual(true);
             expect(femalePreferenceInput.checked).toEqual(false);
             expect(noPreferenceInput.checked).toEqual(false);
@@ -479,6 +509,7 @@ describe('Check Trainer Preferences Validation', () => {
             fireEvent.click(femalePreferenceInput, { target: { value: "Female" } });
         })
         await waitFor(async () => {
+            writeFn({ Trainer_Preference_is_Valid_For_Female: false })
             expect(malePreferenceInput.checked).toEqual(false);
             expect(femalePreferenceInput.checked).toEqual(true);
             expect(noPreferenceInput.checked).toEqual(false);
@@ -490,6 +521,7 @@ describe('Check Trainer Preferences Validation', () => {
             fireEvent.click(noPreferenceInput, { target: { value: "No" } });
         })
         await waitFor(async () => {
+            writeFn({ Trainer_Preference_is_Valid_For_NoPreference: false })
             expect(malePreferenceInput.checked).toEqual(false);
             expect(femalePreferenceInput.checked).toEqual(false);
             expect(noPreferenceInput.checked).toEqual(true);
@@ -506,6 +538,7 @@ describe('Check physioRequired Validation', () => {
             fireEvent.click(button)
         })
         await waitFor(async () => {
+            writeFn({ Physio_is_required: false })
             expect(physioInput1.checked).toEqual(false);
             expect(physioInput2.checked).toEqual(false);
             expect(await screen.findByText(/Physiotherapist required./i)).toBeTruthy();
@@ -518,6 +551,7 @@ describe('Check physioRequired Validation', () => {
             fireEvent.click(physioInput1, { target: { value: "Yes" } });
         })
         await waitFor(async () => {
+            writeFn({ Physio_is_valid_For_Yes: false })
             expect(physioInput1.checked).toEqual(true);
             expect(physioInput2.checked).toEqual(false);
             expect(physioInput1.value).toBe('Yes')
@@ -528,6 +562,7 @@ describe('Check physioRequired Validation', () => {
             fireEvent.click(physioInput2, { target: { value: "No" } });
         })
         await waitFor(async () => {
+            writeFn({ Physio_is_valid_For_No: false })
             expect(physioInput1.checked).toEqual(false);
             expect(physioInput2.checked).toEqual(true);
             expect(physioInput2.value).toBe('No')
@@ -544,6 +579,7 @@ describe('Package Validation', () => {
             fireEvent.click(button)
         })
         await waitFor(async () => {
+            writeFn({ Package_is_required: false })
             expect(package1.checked).toEqual(false);
             expect(package2.checked).toEqual(false);
             expect(package3.checked).toEqual(false);
@@ -557,6 +593,7 @@ describe('Package Validation', () => {
             fireEvent.click(package1, { target: { value: "One Time appointment" } });
         })
         await waitFor(async () => {
+            writeFn({ Package_is_valid_for_One_Time_appointment: false })
             expect(package1.checked).toEqual(true);
             expect(package2.checked).toEqual(false);
             expect(package3.checked).toEqual(false);
@@ -568,6 +605,8 @@ describe('Package Validation', () => {
             fireEvent.click(package2, { target: { value: "4 Sessions per week" } });
         })
         await waitFor(async () => {
+
+            writeFn({ Package_is_valid_for_4_Sessions_per_week: false })
             expect(package1.checked).toEqual(false);
             expect(package2.checked).toEqual(true);
             expect(package3.checked).toEqual(false);
@@ -579,6 +618,7 @@ describe('Package Validation', () => {
             fireEvent.click(package3, { target: { value: "5 Sessions per week" } });
         })
         await waitFor(async () => {
+            writeFn({ Package_is_valid_for_5_Sessions_per_week: false })
             expect(package1.checked).toEqual(false);
             expect(package2.checked).toEqual(false);
             expect(package3.checked).toEqual(true);

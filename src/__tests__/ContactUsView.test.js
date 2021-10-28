@@ -62,6 +62,7 @@ describe('Check Email Field Validation', () => {
         const { email } = setup()
         fireEvent.blur(email);
         await waitFor(async () => {
+            writeFn({ Email_is_required: false })
             expect(await screen.findByText(/Email required./i)).toBeTruthy();
             writeFn({ Email_is_required: true })
         })
@@ -75,6 +76,7 @@ describe('Check Email Field Validation', () => {
             fireEvent.change(email, { target: { value: 'abc@def' } });
         });
         await waitFor(async () => {
+            writeFn({ Email_is_invalid: false })
             expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
             writeFn({ Email_is_invalid: true })
         })
@@ -88,6 +90,7 @@ describe('Check Email Field Validation', () => {
             fireEvent.change(email, { target: { value: 'abc@def.com' } });
         });
         await waitFor(async () => {
+            writeFn({ Email_is_valid: false })
             const emailError = await screen.queryByText(/Invalid email./i);
             expect(emailError).toBeNull();
             writeFn({ Email_is_valid: true })
@@ -105,6 +108,7 @@ describe('Check FirstName Field Validation', () => {
             fireEvent.blur(fNameInput);
         });
         await waitFor(async () => {
+            writeFn({ FirstName_is_required: false })
             expect(await screen.findByText(/First name required./i)).toBeTruthy();
             writeFn({ FirstName_is_required: true })
         })
@@ -118,6 +122,7 @@ describe('Check FirstName Field Validation', () => {
             fireEvent.change(fNameInput, { target: { value: 'abc@def' } });
         });
         await waitFor(async () => {
+            writeFn({ FirstName_is_invalid: false })
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
             writeFn({ FirstName_is_invalid: true })
         })
@@ -131,6 +136,7 @@ describe('Check FirstName Field Validation', () => {
             fireEvent.change(fNameInput, { target: { value: 'Harshit Kishor' } });
         });
         await waitFor(async () => {
+            writeFn({ FirstName_is_valid: false })
             const firstNameError1 = await screen.queryByText(/First name required./i);
             const firstNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(firstNameError1).toBeNull();
@@ -150,6 +156,7 @@ describe('Check LastName Field Validation', () => {
             fireEvent.blur(lNameInput);
         });
         await waitFor(async () => {
+            writeFn({ LastName_is_required: false })
             expect(await screen.findByText(/Last name required./i)).toBeTruthy();
             writeFn({ LastName_is_required: true })
         })
@@ -163,6 +170,7 @@ describe('Check LastName Field Validation', () => {
             fireEvent.change(lNameInput, { target: { value: 'abc@def' } });
         });
         await waitFor(async () => {
+            writeFn({ LastName_is_invalid: false })
             expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
             writeFn({ LastName_is_invalid: true })
         })
@@ -176,6 +184,7 @@ describe('Check LastName Field Validation', () => {
             fireEvent.change(lNameInput, { target: { value: 'Harshit Kishor' } });
         });
         await waitFor(async () => {
+            writeFn({ LastName_is_valid: false })
             const lastNameError1 = await screen.queryByText(/Last name required./i);
             const lastNameError2 = await screen.queryByText(/Only alphabets are allowed for this field/i)
             expect(lastNameError1).toBeNull();
@@ -195,6 +204,7 @@ describe('Check Message Field Validation', () => {
             fireEvent.blur(message);
         });
         await waitFor(async () => {
+            writeFn({ Message_is_required: false })
             expect(await screen.findByText(/Message required./i)).toBeTruthy();
             writeFn({ Message_is_required: true })
         })
@@ -208,6 +218,7 @@ describe('Check Message Field Validation', () => {
             fireEvent.change(message, { target: { value: 'Harshit Kishor' } });
         });
         await waitFor(async () => {
+            writeFn({ Message_is_valid: false })
             const messageError = await screen.queryByText(/Message required./i);
             expect(messageError).toBeNull();
             writeFn({ Message_is_valid: true })
@@ -224,6 +235,7 @@ describe('Check Mobile Field Validation', () => {
             fireEvent.blur(mobile);
         });
         await waitFor(async () => {
+            writeFn({ Mobile_is_required: false })
             expect(await screen.findByText(/Mobile Number required./i)).toBeTruthy();
             writeFn({ Mobile_is_required: true })
         })
@@ -237,6 +249,7 @@ describe('Check Mobile Field Validation', () => {
             fireEvent.change(mobile, { target: { value: '9987654545' } });
         });
         await waitFor(async () => {
+            writeFn({ Mobile_is_valid: false })
             const mobileError = await screen.queryByText(/Mobile Number required./i);
             expect(mobileError).toBeNull();
             writeFn({ Mobile_is_valid: true })

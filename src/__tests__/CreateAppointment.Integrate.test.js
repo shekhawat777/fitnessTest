@@ -139,8 +139,8 @@ const appointmentEnteries = [
 ]
 
 describe('Place Appointment Integrate Test for api', () => {
-    test.each(appointmentEnteries)('check combination for %s',
-        async (appointmentEntry) => {
+    test.each(appointmentEnteries.map((item, i) => [i, item]))('check combination for %s',
+        async (i, appointmentEntry) => {
             const { fNameInput, lNameInput, emailInput, mobileInput, ageInput, totalAmountInput, streetNameInput, cityInput, stateInput, countryInput, pinCodeInput, malePreferenceInput, femalePreferenceInput, noPreferenceInput, physioInput1, physioInput2, weeksInput, package1, package2, package3, form } = setup()
             const fNameRequired = checkRequired(appointmentEntry.firstName)
             const lNameRequired = checkRequired(appointmentEntry.lastName)
@@ -227,38 +227,50 @@ describe('Place Appointment Integrate Test for api', () => {
 
             fireEvent.submit(form);
 
+            writeFn({ [`===========Test Cases for Entry ${i + 1}============`]: '' })
+            writeFn({ [`Check_Required_Field_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Invalid_Email_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Alphabets_Field_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Number_Field_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Age_Field_Validation_for_greater_than_18_and_less_than_60 ${i + 1}`]: false })
+            writeFn({ [`Check_Pin_Code_Validation_should_be_6_digits ${i + 1}`]: false })
+            writeFn({ [`Check_Form_Submit ${i + 1}`]: false })
+            writeFn({ [`Data_inserted_Successfully ${i + 1}`]: false })
+
+
             if (!fNameRequired || !lNameRequired || !mobileRequired || !emailRequired || !ageRequired || !streetNameRequired || !cityRequired || !stateRequired || !countryRequired || !pinCodeRequired || !trainerPreferencesRequired || !physioRequiredRequired || !weeksRequired || !packageRequired) {
                 expect(await screen.findAllByText(/required/i)).toBeTruthy();
-                writeFn({ Check_Required_Field_Validation: true })
+                writeFn({ [`Check_Required_Field_Validation ${i + 1}`]: true })
             } else if (emailRequired && !emailValid) {
                 expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
-                writeFn({ Check_Invalid_Email_Validation: true })
+                writeFn({ [`Check_Invalid_Email_Validation ${i + 1}`]: true })
             } else if ((fNameRequired && !fNameAlpha) || (lNameRequired && !lNameAlpha)) {
                 expect(await screen.findAllByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
-                writeFn({ Check_Alphabets_Field_Validation: true })
+                writeFn({ [`Check_Alphabets_Field_Validation ${i + 1}`]: true })
             } else if ((ageRequired && !ageNumberValid) || (pinCodeRequired && !pinCodeNumberValid) || (weeksRequired && !weeksNumberValid)) {
                 expect(await screen.findAllByText(/Only numbers are allowed for this field./i)).toBeTruthy();
-                writeFn({ Check_Number_Field_Validation: true })
+                writeFn({ [`Check_Number_Field_Validation ${i + 1}`]: true })
             } else if (ageRequired && ageNumberValid && !ageValid) {
                 expect(await screen.findByText(/Age must be greater than 18 and less than 60./i)).toBeTruthy();
-                writeFn({ Check_Age_Field_Validation_for_greater_than_18_and_less_than_60: true })
+                writeFn({ [`Check_Age_Field_Validation_for_greater_than_18_and_less_than_60 ${i + 1}`]: true })
             } else if (pinCodeRequired && pinCodeNumberValid && !pinCodeValid) {
                 expect(await screen.findByText(/Pinocde should be 6 digits/i)).toBeTruthy();
-                writeFn({ Check_Pin_Code_Validation_should_be_6_digits: true })
+                writeFn({ [`Check_Pin_Code_Validation_should_be_6_digits ${i + 1}`]: true })
             } else {
                 await waitFor(() => {
                     const data = { ...appointmentEntry, totalAmount }
                     expect(onFormSubmit).toHaveBeenCalled();
                     expect(onFormSubmit).toHaveBeenCalledTimes(1);
-                    writeFn({ Check_Form_Submit: true })
+                    writeFn({ [`Check_Form_Submit ${i + 1}`]: true })
                     apiService('POST', '/allfriends', data)
                         .then((res) => {
                             expect({ ...data, id: res.data.id }).toEqual(res.data)
                             expect(res.status).toBe(201)
-                            writeFn({ Data_inserted_Successfully: true })
+                            writeFn({ [`Data_inserted_Successfully ${i + 1}`]: true })
                         })
                 })
             }
+            writeFn({ [`===========Test Case End ${i + 1}============`]: '' })
             await act(() => Promise.resolve()); // To avoid act wrapping warning
         }
 

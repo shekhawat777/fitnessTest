@@ -119,37 +119,60 @@ describe("View Appointment Test cases", () => {
     const footer = queryByRowgroupType(container, 'tfoot')
     const tBodyRow = getAllRowsByRowgroupType(container, 'tbody')
 
+    writeFn({ Should_have_View_Appointment_as_the_title: false })
     expect(await screen.findByText(/View Appointment/i)).toBeTruthy();
     writeFn({ Should_have_View_Appointment_as_the_title: true })
 
     if (testData.length) {
+      writeFn({ Should_Not_have_NoItem_Message_For_DataSet: false })
       expect(await screen.queryByText(/No items/i)).toBeFalsy();
       writeFn({ Should_Not_have_NoItem_Message_For_DataSet: true })
+
+      writeFn({ Should_have_CompleteAddress_ColumnName: false })
       expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
       writeFn({ Should_have_CompleteAddress_ColumnName: true })
+
+
       //Test number of rows and cells
+      writeFn({ Should_have_TableBody_With_Data: false })
       expect(rows).toHaveLength(testData.length + 1);
       expect(tBodyRow).toHaveLength(testData.length)
       writeFn({ Should_have_TableBody_With_Data: true })
+
+
       expect(cells).toHaveLength((fields.length * (testData.length + 1)))
       //Test header/footer visibility
+
+      writeFn({ Should_have_Header_Of_Table: false })
       expect(header).toBeTruthy();
       writeFn({ Should_have_Header_Of_Table: true })
+
+      writeFn({ Should_NOT_have_Footer_Of_Table: false })
       expect(footer).toBeFalsy();
       expect(footer).toBeNull();
       writeFn({ Should_NOT_have_Footer_Of_Table: true })
 
     } else {
+      writeFn({ Should_have_NoItem_Message_For_No_DataSet: false })
       expect(await screen.queryByText(/No items/i)).toBeTruthy();
       writeFn({ Should_have_NoItem_Message_For_No_DataSet: true })
+
+      writeFn({ Should_have_CompleteAddress_ColumnName: false })
       expect(await screen.queryByText(/Complete Address/i)).toBeTruthy();
       writeFn({ Should_have_CompleteAddress_ColumnName: true })
+
+
+      writeFn({ Should_have_EmptyTableBody: false })
       expect(rows).toHaveLength(2);
       expect(tBodyRow).toHaveLength(1)
       writeFn({ Should_have_EmptyTableBody: true })
+
+      writeFn({ Should_have_Header_Of_Table: false })
       expect(cells).toHaveLength(fields.length + 1)
       expect(header).toBeTruthy();
       writeFn({ Should_have_Header_Of_Table: true })
+
+      writeFn({ Should_NOT_have_Footer_Of_Table: false })
       expect(footer).toBeNull();
       writeFn({ Should_NOT_have_Footer_Of_Table: true })
     }

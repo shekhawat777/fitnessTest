@@ -1,3 +1,20 @@
-Check_Form_Submit=true
-Check_Required_Field_Validation=true
-Data_inserted_Successfully=true
+===========Test Cases for Entry 1=============
+Check_Required_Field_Validation 1=false
+Check_Invalid_Email_Validation 1=false
+Check_Alphabets_Field_Validation 1=false
+Check_Number_Field_Validation 1=false
+Check_Age_Field_Validation_for_greater_than_18_and_less_than_60 1=false
+Check_Pin_Code_Validation_should_be_6_digits 1=false
+Check_Form_Submit 1=true
+Data_inserted_Successfully 1=true
+===========Test Case End 1=============
+===========Test Cases for Entry 2=============
+Check_Required_Field_Validation 2=true
+Check_Invalid_Email_Validation 2=false
+Check_Alphabets_Field_Validation 2=false
+Check_Number_Field_Validation 2=false
+Check_Age_Field_Validation_for_greater_than_18_and_less_than_60 2=false
+Check_Pin_Code_Validation_should_be_6_digits 2=false
+Check_Form_Submit 2=false
+Data_inserted_Successfully 2=false
+===========Test Case End 2=============

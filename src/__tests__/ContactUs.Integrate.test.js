@@ -68,8 +68,8 @@ const contactUsEnteries = [
 ]
 
 describe('Contact US Integrate Test for api', () => {
-    test.each(contactUsEnteries)('check combination for %s',
-        async (contactUsEntry) => {
+    test.each(contactUsEnteries.map((item, i) => [i, item]))('check combination for %s',
+        async (i, contactUsEntry) => {
             const { fNameInput, lNameInput, mobile, email, message, form } = setup()
 
             const fNameRequired = checkRequired(contactUsEntry.firstName)
@@ -99,33 +99,35 @@ describe('Contact US Integrate Test for api', () => {
 
             fireEvent.submit(form);
 
-            writeFn({ Check_Required_Field_Validation: false })
-            writeFn({ Check_Invalid_Email_Validation: false })
-            writeFn({ Check_Alphabets_Field_Validation: false })
-            writeFn({ Check_Form_Submit: false })
-            writeFn({ Data_inserted_Successfully: false })
+            writeFn({ [`===========Test Cases for Entry ${i + 1}============`]: '' })
+            writeFn({ [`Check_Required_Field_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Invalid_Email_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Alphabets_Field_Validation ${i + 1}`]: false })
+            writeFn({ [`Check_Form_Submit ${i + 1}`]: false })
+            writeFn({ [`Data_inserted_Successfully ${i + 1}`]: false })
             if (!fNameRequired || !lNameRequired || !mobileRequired || !emailRequired || !messageRequired) {
                 expect(await screen.findByText(/required/i)).toBeTruthy();
-                writeFn({ Check_Required_Field_Validation: true })
+                writeFn({ [`Check_Required_Field_Validation ${i + 1}`]: true })
             } else if (emailRequired && !emailValid) {
                 expect(await screen.findByText(/Invalid email./i)).toBeTruthy();
-                writeFn({ Check_Invalid_Email_Validation: true })
+                writeFn({ [`Check_Invalid_Email_Validation ${i + 1}`]: true })
             } else if ((fNameRequired && !fNameAlpha) || (lNameRequired && !lNameAlpha)) {
                 expect(await screen.findByText(/Only alphabets are allowed for this field/i)).toBeTruthy();
-                writeFn({ Check_Alphabets_Field_Validation: true })
+                writeFn({ [`Check_Alphabets_Field_Validation ${i + 1}`]: true })
             } else {
                 await waitFor(() => {
                     expect(onFormSubmit).toHaveBeenCalled();
                     expect(onFormSubmit).toHaveBeenCalledTimes(1);
-                    writeFn({ Check_Form_Submit: true })
+                    writeFn({ [`Check_Form_Submit ${i + 1}`]: true })
                     apiService('POST', '/contactUs', contactUsEntry)
                         .then((res) => {
                             expect({ ...contactUsEntry, id: res.data.id }).toEqual(res.data)
                             expect(res.status).toBe(201)
-                            writeFn({ Data_inserted_Successfully: true })
+                            writeFn({ [`Data_inserted_Successfully ${i + 1}`]: true })
                         })
                 })
             }
+            writeFn({ [`===========Test Case End ${i + 1}============`]: '' })
             await act(() => Promise.resolve()); // To avoid act wrapping warning
         }
 
