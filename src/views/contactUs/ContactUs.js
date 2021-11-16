@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from 'axios';
 import ContactUsView from './ContactUsView';
-import { apiService } from 'src/reusable/Api';
 
 const ContactUs = () => {
 
@@ -14,13 +12,11 @@ const ContactUs = () => {
     }
 
 
-    const onFormSubmit = async (values, { resetForm }) => {
-        apiService('POST', '/contactUs', values)
-            .then((res) => {
-                console.log("Result===", res)
-                resetForm()
-            })
+    const onFormSubmit = async (values) => {
+        console.log("Values", values)
     }
+
+
     return (
         <>
             <ContactUsView initialValues={initialValues} onFormSubmit={onFormSubmit} />

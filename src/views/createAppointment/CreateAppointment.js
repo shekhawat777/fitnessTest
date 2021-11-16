@@ -1,8 +1,5 @@
 import React from 'react'
-
-import axios from 'axios';
 import CreateAppointmentView from './CreateAppointmentView';
-import { apiService } from 'src/reusable/Api';
 
 const CreateAppointment = () => {
     const initialValues = {
@@ -23,12 +20,10 @@ const CreateAppointment = () => {
         totalAmount: 0
     }
 
-    const onFormSubmit = async (values, { resetForm }) => {
-        apiService('POST', '/allfriends', values)
-            .then((res) => {
-                resetForm()
-            })
+    const onFormSubmit = async (values) => {
+        console.log("Values", values)
     }
+
     return (
         <>
             <CreateAppointmentView
